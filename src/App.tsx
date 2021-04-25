@@ -1,11 +1,11 @@
-import { Button } from 'antd'
 import './App.less'
+import { Layout } from 'layout'
 
 function App() {
   return (
-    <div className="App">
-      <Button type="primary">Button</Button>
-    </div>
+    <Layout>
+      <h1>Hello</h1>
+    </Layout>
   )
 }
 
