@@ -1,10 +1,11 @@
 import './App.less'
 import { Layout } from 'layout'
+import { DiscoverScreen } from 'screens/discover'
 
 function App() {
   return (
     <Layout>
-      <h1>Hello</h1>
+      <DiscoverScreen />
     </Layout>
   )
 }

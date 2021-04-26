@@ -9,7 +9,7 @@ export const Searcher = () => {
   return (
     <Container>
       <IconBox>
-        <SearchIcon heighLight={isFocus} />
+        <SearchIcon fill={isFocus ? '#5372ff' : '#707070'} />
       </IconBox>
       <Input
         type="text"
@@ -40,11 +40,7 @@ const IconBox = styled.div`
   width: 2rem;
 `
 
-type SearchIconProps = {
-  heighLight: boolean
-}
-const SearchIcon = styled(Icon)<SearchIconProps>`
-  fill: ${(props) => (props.heighLight ? '#5372ff' : '#707070')};
+const SearchIcon = styled(Icon)`
   display: block;
   width: 1.8rem;
   height: 1.8rem;
