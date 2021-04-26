@@ -57,8 +57,19 @@ const Input = styled.input`
   background: #f6f6f6;
 
   :focus {
-    width: 30rem;
-    border: 1px solid #5372ff;
-    background: white;
+    animation: trigger 0.3s forwards;
+  }
+
+  @keyframes trigger {
+    from {
+      width: 20rem;
+      border: 1px solid #ebebeb;
+      background: #f6f6f6;
+    }
+    to {
+      width: 30rem;
+      background: white;
+      border: 1px solid #5372ff;
+    }
   }
 `
