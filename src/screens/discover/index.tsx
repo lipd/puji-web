@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { Bookcase } from 'components/bookcase'
 import { Filter, FilterDataType, useFilter } from './filter'
 
 const filterData: FilterDataType[] = [
@@ -54,7 +55,9 @@ export const DiscoverScreen = () => {
           updater={setFilterState}
         />
       </Sidebar>
-      {JSON.stringify(filterState)}
+      <Main>
+        <Bookcase />
+      </Main>
     </Page>
   )
 }
@@ -63,8 +66,7 @@ export const Sidebar = styled.aside`
   padding: 2rem 3rem;
   box-sizing: border-box;
   min-height: calc(100vh - 6rem);
-  width: 25rem;
-  border-right: 1px solid white;
+  width: 30rem;
   background: #f1f5f8;
 `
 
@@ -78,4 +80,12 @@ const Title = styled.h2`
   font-size: 1.6rem;
   font-weight: 400;
   color: #454545;
+`
+
+const Main = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: flex;
+  width: 100%;
+  padding: 0rem 2rem;
 `
