@@ -38,7 +38,7 @@ export const Footer = () => {
 
 const Container = styled.footer`
   display: flex;
-  padding: 4rem calc((100% - 120rem) / 2) 4rem;
+  padding: 6rem calc((100% - 120rem) / 2) 6rem;
   background: #2a2a2a;
 `
 

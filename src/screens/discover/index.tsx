@@ -65,7 +65,6 @@ export const DiscoverScreen = () => {
 export const Sidebar = styled.aside`
   padding: 2rem 3rem;
   box-sizing: border-box;
-  min-height: calc(100vh - 6rem);
   width: 30rem;
   background: #f1f5f8;
 `

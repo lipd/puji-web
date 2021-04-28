@@ -26,14 +26,12 @@ export const Header = ({ keyword, filter }: HeaderProps) => {
       </Left>
       <Right>
         <Dropdown overlay={menu} trigger={['click']}>
-          {/* <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}> */}
           <Sorter type="link">
             <SorterText>
               排序方式：<span style={{ color: '#5372ff' }}>默认</span>
             </SorterText>
             <SortIcon width="2rem" height="2rem" />
           </Sorter>
-          {/* </a> */}
         </Dropdown>
       </Right>
     </Container>
@@ -76,6 +74,7 @@ const Sorter = styled(Button)`
 const SorterText = styled.h4`
   font-size: 1.4rem;
   padding-right: 0.5rem;
+  color: #454545;
   :hover {
     color: #5372ff;
   }
@@ -85,6 +84,7 @@ const SortIcon = styled(Sort)`
   display: block;
   position: relative;
   top: 1px;
+  fill: #454545;
 
   :hover {
     fill: #5372ff;
