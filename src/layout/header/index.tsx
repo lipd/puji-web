@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { ReactComponent as BrandIcon } from 'assets/brand.svg'
 import { ReactComponent as Upload } from 'assets/upload.svg'
+import { color } from 'style/color'
 import { Searcher } from './search'
 
 export const Header = () => {
@@ -44,7 +45,7 @@ const NavItem = styled.h2`
   color: #8590a6;
 
   :hover {
-    color: #5372ff;
+    color: ${color.primary};
   }
 `
 
@@ -69,6 +70,6 @@ const UploadIcon = styled(Upload)`
   width: 3.5rem;
 
   :hover {
-    fill: #5372ff;
+    fill: ${color.primary};
   }
 `

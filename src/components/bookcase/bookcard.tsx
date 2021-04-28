@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { ReactComponent as FavoriteIcon } from 'assets/favorite.svg'
 import { ReactComponent as LikeIcon } from 'assets/like.svg'
+import { color } from 'style/color'
 
 const score = {
   cover:
@@ -54,7 +55,7 @@ const Container = styled.div`
   width: ${CARD_SIZE.WIDTH}rem;
   height: ${CARD_SIZE.HEIGHT}rem;
   margin: ${CARD_SIZE.MARGIN}rem;
-  background: #f1f5f8;
+  background: ${color.cyan};
   border-radius: 1rem;
   box-shadow: 0 1px 2px rgb(0 0 0 / 15%);
   padding: 2rem;
@@ -97,13 +98,13 @@ const Author = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  color: #8792a6;
+  color: ${color.grey};
 `
 
 const Instrument = styled.div`
   padding-left: 0.5rem;
   font-size: 1.2rem;
-  color: #8792a6;
+  color: ${color.grey};
 `
 
 const Bottom = styled.div`
@@ -111,13 +112,13 @@ const Bottom = styled.div`
   align-items: center;
   font-size: 1.2rem;
   font-weight: 500;
-  color: #8792a6;
+  color: ${color.grey};
   padding: 0 0 1rem 0.5rem;
 
   .icon {
     display: block;
     margin-right: 0.5rem;
-    fill: #5372ff;
+    fill: ${color.primary};
     width: 1.4rem;
     height: 1.4rem;
   }

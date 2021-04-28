@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { Bookcase } from 'components/bookcase'
+import { color } from 'style/color'
 import { Filter, FilterDataType, useFilter } from './filter'
 
 const filterData: FilterDataType[] = [
@@ -66,7 +67,7 @@ export const Sidebar = styled.aside`
   padding: 2rem 3rem;
   box-sizing: border-box;
   width: 30rem;
-  background: #f1f5f8;
+  background: ${color.cyan};
 `
 
 const Page = styled.div`
@@ -78,7 +79,7 @@ const Title = styled.h2`
   margin-bottom: 1.5rem;
   font-size: 1.6rem;
   font-weight: 400;
-  color: #454545;
+  color: ${color.somber};
 `
 
 const Main = styled.main`

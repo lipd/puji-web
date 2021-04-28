@@ -1,6 +1,7 @@
 import { Menu, Dropdown, Button } from 'antd'
 import styled from '@emotion/styled'
 import { ReactComponent as Sort } from 'assets/sort.svg'
+import { color } from 'style/color'
 
 const menu = (
   <Menu>
@@ -28,7 +29,7 @@ export const Header = ({ keyword, filter }: HeaderProps) => {
         <Dropdown overlay={menu} trigger={['click']}>
           <Sorter type="link">
             <SorterText>
-              排序方式：<span style={{ color: '#5372ff' }}>默认</span>
+              排序方式：<span style={{ color: color.primary }}>默认</span>
             </SorterText>
             <SortIcon width="2rem" height="2rem" />
           </Sorter>
@@ -42,7 +43,7 @@ const Container = styled.div`
   display: flex;
   margin: 1rem 1rem 0.5rem;
   padding: 0 0 0.2rem 0;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid ${color.greyLight};
 `
 
 const Left = styled.div`
@@ -57,7 +58,7 @@ const Hint = styled.h2`
 const Keyword = styled.span`
   font-size: 1.8rem;
   font-weight: 500;
-  color: #5372ff;
+  color: ${color.primary};
 `
 
 const Right = styled.div`
@@ -74,9 +75,9 @@ const Sorter = styled(Button)`
 const SorterText = styled.h4`
   font-size: 1.4rem;
   padding-right: 0.5rem;
-  color: #454545;
+  color: ${color.somber};
   :hover {
-    color: #5372ff;
+    color: ${color.primary};
   }
 `
 
@@ -84,9 +85,9 @@ const SortIcon = styled(Sort)`
   display: block;
   position: relative;
   top: 1px;
-  fill: #454545;
+  fill: ${color.somber};
 
   :hover {
-    fill: #5372ff;
+    fill: ${color.primary};
   }
 `

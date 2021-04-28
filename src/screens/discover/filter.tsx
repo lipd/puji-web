@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { Checkbox as AntCheckbox, Row } from 'antd'
 import { useState } from 'react'
+import { color } from 'style/color'
 
 const CheckboxGroup = AntCheckbox.Group
 
@@ -91,5 +92,5 @@ const Title = styled.h4`
 const Checkbox = styled(AntCheckbox)`
   padding-left: 2rem;
   font-size: 1.2rem;
-  color: #454545;
+  color: ${color.somber};
 `

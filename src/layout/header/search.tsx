@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { ReactComponent as Icon } from 'assets/search.svg'
 import { useState } from 'react'
+import { color } from 'style/color'
 
 const REMIND_TEXT = '乐谱名称 & 作者'
 
@@ -9,7 +10,7 @@ export const Searcher = () => {
   return (
     <Container>
       <IconBox>
-        <SearchIcon fill={isFocus ? '#5372ff' : '#707070'} />
+        <SearchIcon fill={isFocus ? color.primary : '#707070'} />
       </IconBox>
       <Input
         type="text"
@@ -69,7 +70,7 @@ const Input = styled.input`
     to {
       width: 30rem;
       background: white;
-      border: 1px solid #5372ff;
+      border: 1px solid ${color.primary};
     }
   }
 `
