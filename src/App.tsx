@@ -1,11 +1,13 @@
 import './App.less'
 import { Layout } from 'layout'
-import { DiscoverScreen } from 'screens/discover'
+import { ScoreScreen } from 'screens/score'
+// import { DiscoverScreen } from 'screens/discover'
 
 function App() {
   return (
-    <Layout>
-      <DiscoverScreen />
+    <Layout footer={false}>
+      {/* <DiscoverScreen /> */}
+      <ScoreScreen />
     </Layout>
   )
 }

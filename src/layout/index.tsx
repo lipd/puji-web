@@ -3,12 +3,21 @@ import { ReactNode } from 'react'
 import { Footer } from './footer'
 import { Header } from './header'
 
-export const Layout = ({ children }: { children: ReactNode }) => {
+interface LayoutProps {
+  children: ReactNode
+  header?: boolean
+  footer?: boolean
+}
+export const Layout = ({
+  children,
+  header = true,
+  footer = true,
+}: LayoutProps) => {
   return (
     <Container>
-      <Header />
+      {header && <Header />}
       <Main>{children}</Main>
-      <Footer />
+      {footer && <Footer />}
     </Container>
   )
 }
