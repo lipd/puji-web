@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { LegacyRef, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { OpenSheetMusicDisplay as OSMD } from 'opensheetmusicdisplay'
 import { color } from 'style/color'
 
@@ -21,21 +21,20 @@ export const Score = () => {
 
   return (
     <Container>
-      <Box>
+      <Paper>
         <div className="canvas" ref={canvasRef}></div>
-      </Box>
+      </Paper>
     </Container>
   )
 }
 
 const Container = styled.div`
-  min-height: 100%;
   background-color: ${color.greyLight};
   display: flex;
   justify-content: center;
 `
 
-const Box = styled.div`
+const Paper = styled.div`
   width: 70rem;
   background: white;
 `

@@ -46,7 +46,7 @@ const Container = styled.div`
   height: 100%;
   box-sizing: border-box;
   padding: 1.5rem;
-  width: 40rem;
+  width: 100%;
   background: ${color.cyan};
 `
 const Divider = styled.hr`
