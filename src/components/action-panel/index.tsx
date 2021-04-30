@@ -12,8 +12,8 @@ export const ActionPanel = () => {
       <LikeIcon className="icon" />
       <FavoriteIcon className="icon" />
       <DownloadIcon className="icon" />
-      <PrintIcon className="icon" />
       <ShareIcon className="icon" />
+      <PrintIcon className="icon" />
     </Container>
   )
 }
@@ -21,11 +21,12 @@ export const ActionPanel = () => {
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
 
   .icon {
     fill: ${color.primary};
-    width: 3rem;
-    height: 3rem;
+    width: 2.4rem;
+    height: 2.4rem;
   }
 `
