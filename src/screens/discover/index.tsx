@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { Bookcase } from 'components/bookcase'
+import { Layout } from 'layout'
 import { color } from 'style/color'
 import { Filter, FilterDataType, useFilter } from './filter'
 
@@ -47,19 +48,21 @@ export const DiscoverScreen = () => {
   const [filterState, setFilterState] = useFilter(filterData)
 
   return (
-    <Page>
-      <Sidebar>
-        <Title>筛选条件</Title>
-        <Filter
-          filterData={filterData}
-          filterState={filterState}
-          updater={setFilterState}
-        />
-      </Sidebar>
-      <Main>
-        <Bookcase />
-      </Main>
-    </Page>
+    <Layout>
+      <Page>
+        <Sidebar>
+          <Title>筛选条件</Title>
+          <Filter
+            filterData={filterData}
+            filterState={filterState}
+            updater={setFilterState}
+          />
+        </Sidebar>
+        <Main>
+          <Bookcase />
+        </Main>
+      </Page>
+    </Layout>
   )
 }
 

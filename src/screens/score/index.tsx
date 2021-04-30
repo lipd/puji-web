@@ -1,17 +1,20 @@
 import styled from '@emotion/styled'
 import { Score } from 'components/score'
+import { Layout } from 'layout'
 import { MessagePanel } from './message-panel'
 
 export const ScoreScreen = () => {
   return (
-    <Container>
-      <Left>
-        <Score />
-      </Left>
-      <Right>
-        <MessagePanel />
-      </Right>
-    </Container>
+    <Layout footer={false}>
+      <Container>
+        <Left>
+          <Score />
+        </Left>
+        <Right>
+          <MessagePanel />
+        </Right>
+      </Container>
+    </Layout>
   )
 }
 
