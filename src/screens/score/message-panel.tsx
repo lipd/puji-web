@@ -19,7 +19,7 @@ const score = {
   genre: ['流行', '电子', '世界音乐', '其他'],
   lisence: ['可商用', '可修改', '可分享', '个人使用'],
   description:
-    'My piano sheet is suitable for those with small hand / short finger. I am an anime lover from Malaysia. Please do support my musescore if you like my piano arrangement. Thank you! (●♡◡♡●)',
+    'My piano sheet is suitable for those with small hand / short finger. I am an anime lover from somewhere. Please do support my musescore if you like my piano arrangement. Thank you! (●♡◡♡●)',
 }
 
 export const MessagePanel = () => {

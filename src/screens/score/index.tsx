@@ -1,16 +1,23 @@
 import styled from '@emotion/styled'
 import { Score } from 'components/score'
+import { ScorePlayer } from 'components/score/score-player'
+import { useScore } from 'components/score/useScore'
 import { Layout } from 'layout'
+import { useRef } from 'react'
 import { color } from 'style/color'
 import { MessagePanel } from './message-panel'
 
 export const ScoreScreen = () => {
+  const scoreRef = useRef(null)
+  const { player } = useScore({ scoreRef })
   return (
     <Layout footer={false}>
       <Container>
-        <Player />
+        <Player>
+          <ScorePlayer player={player} />
+        </Player>
         <Left>
-          <Score />
+          <Score scoreRef={scoreRef} />
         </Left>
         <Right>
           <MessagePanel />
@@ -35,7 +42,6 @@ const Player = styled.div`
   position: absolute;
   width: calc(100% - 40rem);
   height: 4rem;
-  background: ${color.cyan};
 `
 
 const Right = styled.aside`

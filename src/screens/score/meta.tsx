@@ -10,7 +10,7 @@ export const Meta = ({ data = [] }: { data: MetaItem[] }) => {
   return (
     <Container>
       {data.map((each) => (
-        <Item>
+        <Item key={each.key}>
           <ItemKey>{each.key}</ItemKey>
           <ItemValue>
             {Array.isArray(each.value) ? (
@@ -29,7 +29,7 @@ const List = ({ data }: { data: string[] }) => {
   return (
     <div>
       {data.map((each) => (
-        <Span>{each}</Span>
+        <Span key={each}>{each}</Span>
       ))}
     </div>
   )
