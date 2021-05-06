@@ -5,11 +5,13 @@ import { useScore } from 'components/score/useScore'
 import { Layout } from 'layout'
 import { useRef } from 'react'
 import { color } from 'style/color'
+import { useRequest } from 'utils/hooks/useRequest'
 import { MessagePanel } from './message-panel'
 
 export const ScoreScreen = () => {
   const scoreRef = useRef(null)
   const { renderer, player } = useScore({ scoreRef })
+  const { res: score, loading } = useRequest({ url: 'scores/1' }, {})
   return (
     <Layout footer={false}>
       <Container>
@@ -20,7 +22,7 @@ export const ScoreScreen = () => {
           <Score renderer={renderer} scoreRef={scoreRef} />
         </Left>
         <Right>
-          <MessagePanel />
+          <MessagePanel score={score} loading={loading} />
         </Right>
       </Container>
     </Layout>

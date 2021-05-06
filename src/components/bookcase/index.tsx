@@ -1,23 +1,18 @@
 import styled from '@emotion/styled'
-import { Score, Bookcard, CARD_SIZE } from './bookcard'
+import { Bookcard, CARD_SIZE } from './bookcard'
 import { Header } from './header'
 import { Pagination } from 'antd'
+import { Score } from 'types'
 
-export const Bookcase = ({ scores }: { scores?: Score[] }) => {
+export const Bookcase = ({ scores }: { scores: Score[] }) => {
   return (
     <Container>
       <Header keyword="Sonata" />
       <Wrapper>
         <BookcardGroup>
-          <Bookcard />
-          <Bookcard />
-          <Bookcard />
-          <Bookcard />
-          <Bookcard />
-          <Bookcard />
-          <Bookcard />
-          <Bookcard />
-          <Bookcard />
+          {scores.map((score) => (
+            <Bookcard key={score.id} score={score} />
+          ))}
         </BookcardGroup>
       </Wrapper>
       <Bottom>

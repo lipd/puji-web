@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import { Bookcase } from 'components/bookcase'
 import { Layout } from 'layout'
 import { color } from 'style/color'
+import { useRequest } from 'utils/hooks/useRequest'
 import { Filter, FilterDataType, useFilter } from './filter'
 
 const filterData: FilterDataType[] = [
@@ -46,6 +47,7 @@ const filterData: FilterDataType[] = [
 
 export const DiscoverScreen = () => {
   const [filterState, setFilterState] = useFilter(filterData)
+  const { res: scores } = useRequest({ url: '/scores' }, [])
 
   return (
     <Layout>
@@ -59,7 +61,7 @@ export const DiscoverScreen = () => {
           />
         </Sidebar>
         <Main>
-          <Bookcase />
+          <Bookcase scores={scores} />
         </Main>
       </Page>
     </Layout>

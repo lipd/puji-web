@@ -2,16 +2,7 @@ import styled from '@emotion/styled'
 import { ReactComponent as FavoriteIcon } from 'assets/favorite.svg'
 import { ReactComponent as LikeIcon } from 'assets/like.svg'
 import { color } from 'style/color'
-
-const score = {
-  cover:
-    'https://musescore.com/static/musescore/scoredata/g/f7c7950e4fdcbd1c7f0a7716bce8198977e39fed/score_0.png@180x252?no-cache=1611220722&bgclr=ffffff',
-  name: 'Easy Partition Piano Titanic - My Heart Will Go onsadfsaf asdf',
-  author: 'Ackse Avdwes',
-  instrument: '钢琴',
-  favorite: 23,
-  like: 231,
-}
+import { Score } from 'types'
 
 export const CARD_SIZE = {
   WIDTH: 32,
@@ -19,16 +10,7 @@ export const CARD_SIZE = {
   MARGIN: 1,
 }
 
-export type Score = {
-  cover: string
-  name: string
-  author: string
-  favorite: number
-  like: number
-  view: number
-}
-
-export const Bookcard = ({ data }: { data?: Score }) => {
+export const Bookcard = ({ score }: { score: Score }) => {
   return (
     <Container>
       <Image src={score.cover} />
