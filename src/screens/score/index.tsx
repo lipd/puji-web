@@ -9,7 +9,7 @@ import { MessagePanel } from './message-panel'
 
 export const ScoreScreen = () => {
   const scoreRef = useRef(null)
-  const { player } = useScore({ scoreRef })
+  const { renderer, player } = useScore({ scoreRef })
   return (
     <Layout footer={false}>
       <Container>
@@ -17,7 +17,7 @@ export const ScoreScreen = () => {
           <ScorePlayer player={player} />
         </Player>
         <Left>
-          <Score scoreRef={scoreRef} />
+          <Score renderer={renderer} scoreRef={scoreRef} />
         </Left>
         <Right>
           <MessagePanel />

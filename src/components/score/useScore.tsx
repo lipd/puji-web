@@ -9,7 +9,7 @@ interface useScoreParams {
 }
 export const useScore = ({ scoreRef }: useScoreParams) => {
   const [rendererLoading, setRendererLoading] = useState(true)
-  const [renderer, setRenderer] = useState<null | OSMD>(null)
+  const [osmd, setOSMD] = useState<null | OSMD>(null)
 
   const [playerLoading, setPlayerLoading] = useState(true)
   const [engine] = useState(() => new AudioPlayer())
@@ -29,7 +29,7 @@ export const useScore = ({ scoreRef }: useScoreParams) => {
 
       osmd.zoom = 0.6
       osmd.render()
-      setRenderer(osmd)
+      setOSMD(osmd)
       setRendererLoading(false)
 
       await engine.loadScore(osmd as any)
@@ -45,8 +45,8 @@ export const useScore = ({ scoreRef }: useScoreParams) => {
   }, [])
 
   return {
-    osmd: {
-      renderer,
+    renderer: {
+      osmd,
       loading: rendererLoading,
     },
     player: {
