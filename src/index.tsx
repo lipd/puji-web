@@ -1,10 +1,10 @@
-import React from 'react'
+import { AppProvider } from 'context'
 import ReactDOM from 'react-dom'
 import App from './App'
 
 ReactDOM.render(
-  <React.StrictMode>
+  <AppProvider>
     <App />
-  </React.StrictMode>,
+  </AppProvider>,
   document.getElementById('root'),
 )

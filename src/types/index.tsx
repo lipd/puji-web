@@ -15,3 +15,11 @@ export interface Score {
   favorite: number
   like: number
 }
+
+export interface User {
+  name: string
+  avatar: string
+  password: string
+  description: string
+  token?: string
+}

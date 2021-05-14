@@ -1,8 +1,14 @@
 import { Form, Input } from 'antd'
+import { useAuth } from 'hooks/use-auth'
 import { LongButton } from '.'
 
 export const Login = () => {
-  const handleSubmit = () => {}
+  const { login } = useAuth()
+
+  const handleSubmit = (values: { username: string; password: string }) => {
+    login(values)
+  }
+
   return (
     <Form onFinish={handleSubmit}>
       <Form.Item
@@ -15,7 +21,7 @@ export const Login = () => {
         name="password"
         rules={[{ required: true, message: '请输入密码' }]}
       >
-        <Input placeholder="密码" type="password" id="username" />
+        <Input placeholder="密码" type="password" id="password" />
       </Form.Item>
       <Form.Item>
         <LongButton htmlType="submit" type="primary">
