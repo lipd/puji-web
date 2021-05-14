@@ -23,3 +23,8 @@ export interface User {
   description: string
   token?: string
 }
+
+export interface AuthForm {
+  username: string
+  password: string
+}

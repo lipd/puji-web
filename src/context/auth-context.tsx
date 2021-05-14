@@ -1,18 +1,13 @@
 import { message } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { User } from 'types'
+import { AuthForm, User } from 'types'
 import * as auth from 'utils/auth'
 import { request } from 'utils/request'
 
-interface AuthForm {
-  password: string
-  username: string
-}
-
 interface AuthContextValue {
   user: User | null
-  login: (from: AuthForm) => void
-  register: (from: AuthForm) => void
+  login: (from: AuthForm) => Promise<void>
+  register: (from: AuthForm) => Promise<void>
   logout: () => void
 }
 

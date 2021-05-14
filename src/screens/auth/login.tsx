@@ -1,12 +1,25 @@
-import { Form, Input } from 'antd'
+import { Form, Input, message } from 'antd'
 import { useAuth } from 'hooks/use-auth'
+import { useState } from 'react'
+import { useHistory } from 'react-router'
+import { AuthForm } from 'types'
 import { LongButton } from '.'
 
 export const Login = () => {
+  const [isLoading, setIsLoading] = useState(false)
   const { login } = useAuth()
+  const history = useHistory()
 
-  const handleSubmit = (values: { username: string; password: string }) => {
-    login(values)
+  const handleSubmit = async (values: AuthForm) => {
+    setIsLoading(true)
+    try {
+      await login(values)
+      message.success('登录成功')
+      history.replace('/')
+    } catch (err) {
+      message.error(err.response.data.message)
+    }
+    setIsLoading(false)
   }
 
   return (
@@ -24,7 +37,7 @@ export const Login = () => {
         <Input placeholder="密码" type="password" id="password" />
       </Form.Item>
       <Form.Item>
-        <LongButton htmlType="submit" type="primary">
+        <LongButton loading={isLoading} htmlType="submit" type="primary">
           登录
         </LongButton>
       </Form.Item>

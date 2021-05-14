@@ -6,7 +6,7 @@ import { Register } from './register'
 import brand from 'assets/brand.svg'
 
 export const AuthScreen = () => {
-  const [isRegister, setIsRegister] = useState(true)
+  const [isRegister, setIsRegister] = useState(false)
   return (
     <Layout>
       <Container>
