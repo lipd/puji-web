@@ -1,10 +1,24 @@
 import styled from '@emotion/styled'
 import { ReactComponent as BrandIcon } from 'assets/brand.svg'
 import { ReactComponent as Upload } from 'assets/upload.svg'
+import { useAuth } from 'hooks/use-auth'
 import { color } from 'style/color'
 import { Searcher } from './search'
+import userOnline from 'assets/user-online.svg'
+import userOffline from 'assets/user-offline.svg'
+
+interface AvatarProps {
+  icon: string
+}
 
 export const Header = () => {
+  const { user } = useAuth()
+  let icon: string
+  if (user) {
+    icon = user.avatar ? user.avatar : userOnline
+  } else {
+    icon = userOffline
+  }
   return (
     <Container>
       <HeaderLeft>
@@ -15,7 +29,7 @@ export const Header = () => {
       </HeaderLeft>
       <HeaderRight>
         <Searcher />
-        <Avatar src="http://iconfont.alicdn.com/t/87e2bccd-e9ce-451a-8e93-346c073ce4a4.png@200h_200w.jpg" />
+        <Avatar icon={icon} />
         <UploadIcon />
       </HeaderRight>
     </Container>
@@ -54,7 +68,9 @@ const HeaderRight = styled.div`
   align-items: center;
 `
 
-const Avatar = styled.img`
+const Avatar = styled.div<AvatarProps>`
+  background: url(${(props) => props.icon}) center no-repeat;
+  background-size: 3.2rem;
   display: block;
   height: 3.2rem;
   width: 3.2rem;
