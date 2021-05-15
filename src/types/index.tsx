@@ -18,6 +18,7 @@ export interface Score {
 
 export interface User {
   name: string
+  _id: string
   avatar: string
   password: string
   description: string
