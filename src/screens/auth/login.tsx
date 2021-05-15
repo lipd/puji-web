@@ -15,11 +15,12 @@ export const Login = () => {
     try {
       await login(values)
       message.success('登录成功')
+      setIsLoading(false)
       history.replace('/')
     } catch (err) {
       message.error(err.response.data.message)
+      setIsLoading(false)
     }
-    setIsLoading(false)
   }
 
   return (
