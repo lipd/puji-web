@@ -42,7 +42,7 @@ export const useScore = ({ scoreRef }: useScoreParams) => {
       setPlayerLoading(false)
     }
     init()
-  }, [])
+  }, [engine, scoreRef])
 
   return {
     renderer: {
