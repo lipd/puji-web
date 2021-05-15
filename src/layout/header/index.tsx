@@ -6,19 +6,49 @@ import { color } from 'style/color'
 import { Searcher } from './search'
 import userOnline from 'assets/user-online.svg'
 import userOffline from 'assets/user-offline.svg'
+import { Dropdown, Menu, message } from 'antd'
+import { Link, useHistory } from 'react-router-dom'
 
 interface AvatarProps {
   icon: string
 }
 
 export const Header = () => {
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
+  const history = useHistory()
   let icon: string
   if (user) {
     icon = user.avatar ? user.avatar : userOnline
   } else {
     icon = userOffline
   }
+
+  const handleLogout = () => {
+    logout()
+    history.push('/sign')
+    message.success('已成功登出')
+  }
+
+  const menu = (
+    <Menu>
+      {user ? (
+        <>
+          <Menu.Item>
+            <Link to={`/user/${user._id}`}>个人主页</Link>
+          </Menu.Item>
+          <Menu.Divider />
+          <Menu.Item danger onClick={handleLogout}>
+            登出
+          </Menu.Item>
+        </>
+      ) : (
+        <Menu.Item>
+          <Link to="/sign">登录</Link>
+        </Menu.Item>
+      )}
+    </Menu>
+  )
+
   return (
     <Container>
       <HeaderLeft>
@@ -29,7 +59,9 @@ export const Header = () => {
       </HeaderLeft>
       <HeaderRight>
         <Searcher />
-        <Avatar icon={icon} />
+        <Dropdown overlay={menu}>
+          <Avatar icon={icon} />
+        </Dropdown>
         <UploadIcon />
       </HeaderRight>
     </Container>
@@ -81,9 +113,9 @@ const Avatar = styled.div<AvatarProps>`
 const UploadIcon = styled(Upload)`
   fill: #707070;
   position: relative;
-  top: 2px;
+  top: 1px;
   height: 3.2rem;
-  width: 3.5rem;
+  width: 3.2rem;
 
   :hover {
     fill: ${color.primary};

@@ -22,6 +22,6 @@ export function useRequest(
       .catch((err) => {
         Promise.reject(err)
       })
-  }, [])
+  }, [data, method, url])
   return { res: response, loading }
 }
