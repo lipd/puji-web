@@ -8,9 +8,9 @@ export interface Score {
   cover: string
   time: string
   author: string
-  instrument: string[]
-  genre: string[]
-  lisence: string[]
+  instruments: string[]
+  genres: string[]
+  lisences: string[]
   description: string
   favorite: number
   like: number

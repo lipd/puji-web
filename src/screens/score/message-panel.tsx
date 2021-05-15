@@ -14,9 +14,9 @@ export const MessagePanel = ({ score, loading }: MessagePanelProp) => {
   const meta = [
     { key: '上传时间', value: score.time },
     { key: '作者', value: score.author },
-    { key: '乐器', value: score.instrument },
-    { key: '风格', value: score.genre },
-    { key: '许可', value: score.lisence },
+    { key: '乐器', value: score.instruments },
+    { key: '风格', value: score.genres },
+    { key: '许可', value: score.lisences },
   ]
   return (
     <Container>

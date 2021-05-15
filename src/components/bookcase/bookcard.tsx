@@ -18,7 +18,7 @@ export const Bookcard = ({ score }: { score: Score }) => {
         <Top>
           <Title title={score.name}>{score.name}</Title>
           <Author title={score.author}>{score.author}</Author>
-          <Instrument>{score.instrument}</Instrument>
+          <Instrument>{score.instruments}</Instrument>
         </Top>
         <Bottom>
           <FavoriteIcon className="icon" />
