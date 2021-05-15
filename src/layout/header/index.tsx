@@ -62,7 +62,9 @@ export const Header = () => {
         <Dropdown overlay={menu}>
           <Avatar icon={icon} />
         </Dropdown>
-        <UploadIcon />
+        <Link to="/upload" style={{ height: '3.2rem' }}>
+          <UploadIcon />
+        </Link>
       </HeaderRight>
     </Container>
   )
