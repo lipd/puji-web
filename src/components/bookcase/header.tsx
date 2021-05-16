@@ -40,6 +40,7 @@ export const Header = ({ keyword, filter }: HeaderProps) => {
 }
 
 const Container = styled.div`
+  min-width: 100rem;
   display: flex;
   margin: 1rem 1rem 0.5rem;
   padding: 0 0 0.2rem 0;

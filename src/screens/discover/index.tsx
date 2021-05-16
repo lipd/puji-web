@@ -1,8 +1,11 @@
 import styled from '@emotion/styled'
 import { Bookcase } from 'components/bookcase'
+import { useMount } from 'hooks/use-mount'
+import { useRequest } from 'hooks/use-request'
 import { Layout } from 'layout'
+import { useState } from 'react'
 import { color } from 'style/color'
-import { useRequest } from 'utils/hooks/useRequest'
+import { Score } from 'types'
 import { Filter, FilterDataType, useFilter } from './filter'
 
 const filterData: FilterDataType[] = [
@@ -47,7 +50,14 @@ const filterData: FilterDataType[] = [
 
 export const DiscoverScreen = () => {
   const [filterState, setFilterState] = useFilter(filterData)
-  const { res: scores } = useRequest({ url: '/scores' }, [])
+  const request = useRequest()
+  const [scores, setScores] = useState<Score[]>([])
+
+  useMount(() => {
+    request({ url: '/scores' }).then((res) => {
+      setScores(res.data)
+    })
+  })
 
   return (
     <Layout>
