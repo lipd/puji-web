@@ -52,10 +52,18 @@ export const Header = () => {
   return (
     <Container>
       <HeaderLeft>
-        <BrandIcon width="10.5rem" height="3.5rem" />
-        <NavItem>发现</NavItem>
-        <NavItem>收藏</NavItem>
-        <NavItem>频道</NavItem>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
+          <BrandIcon width="10.5rem" height="3.5rem" />
+        </Link>
+        <Link to="/">
+          <NavItem>首页</NavItem>
+        </Link>
+        <Link to="/collection">
+          <NavItem>收藏</NavItem>
+        </Link>
+        <Link to="/mine">
+          <NavItem>我的乐谱</NavItem>
+        </Link>
       </HeaderLeft>
       <HeaderRight>
         <Searcher />
