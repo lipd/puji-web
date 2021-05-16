@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/score">
+        <Route path="/score/:id">
           <ScoreScreen />
         </Route>
         <Route path="/sign">

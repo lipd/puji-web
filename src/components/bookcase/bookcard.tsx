@@ -13,7 +13,9 @@ export const CARD_SIZE = {
 export const Bookcard = ({ score }: { score: Score }) => {
   return (
     <Container>
-      <Image src={score.cover} />
+      <Image
+        src={`https://musescore.com/static/musescore/scoredata/g/f7c7950e4fdcbd1c7f0a7716bce8198977e39fed/score_0.png@180x252?no-cache=1611220722&bgclr=ffffff`}
+      />
       <Meta>
         <Top>
           <Title title={score.name}>{score.name}</Title>
