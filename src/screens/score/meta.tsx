@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { color } from 'style/color'
+import { translator } from 'utils/translate'
 
 export type MetaItem = {
   key: string
@@ -29,7 +30,7 @@ const List = ({ data }: { data: string[] }) => {
   return (
     <ListBox>
       {data.map((each) => (
-        <ListItem key={each}>{each}</ListItem>
+        <ListItem key={each}>{translator[each]}</ListItem>
       ))}
     </ListBox>
   )
