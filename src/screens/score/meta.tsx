@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { color } from 'style/color'
 
-type MetaItem = {
+export type MetaItem = {
   key: string
   value: string | string[]
 }
@@ -9,7 +9,7 @@ type MetaItem = {
 export const Meta = ({ data = [] }: { data: MetaItem[] }) => {
   return (
     <Container>
-      {data.map((each) => (
+      {data.map((each, i) => (
         <Item key={each.key}>
           <ItemKey>{each.key}</ItemKey>
           <ItemValue>
@@ -27,11 +27,11 @@ export const Meta = ({ data = [] }: { data: MetaItem[] }) => {
 
 const List = ({ data }: { data: string[] }) => {
   return (
-    <div>
+    <ListBox>
       {data.map((each) => (
-        <Span key={each}>{each}</Span>
+        <ListItem key={each}>{each}</ListItem>
       ))}
-    </div>
+    </ListBox>
   )
 }
 
@@ -53,15 +53,20 @@ const ItemKey = styled.div`
 const ItemValue = styled.div`
   flex: 1;
   align-items: center;
-  height: 2rem;
+  min-height: 2rem;
   line-height: 3rem;
 `
 
-const Span = styled.span`
-  display: inline-block;
+const ListBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+
+const ListItem = styled.div`
   line-height: 2.6rem;
-  padding: 0.2rem 0.5rem;
+  padding: 0.1rem 0.5rem;
   margin-right: 0.5rem;
+  margin-bottom: 0.7rem;
   border-radius: 0.5rem;
   color: ${color.primary};
   background-color: rgba(83, 115, 255, 0.1);

@@ -5,12 +5,12 @@ import { ReactComponent as PlayIcon } from 'assets/player.svg'
 import { ReactComponent as PauseIcon } from 'assets/pause.svg'
 import { ReactComponent as ResetIcon } from 'assets/reset.svg'
 import { useState } from 'react'
-import PlaybackEngine from 'osmd-audio-player'
+import AudioPlayer from 'osmd-audio-player'
 
 interface ScorePlayerProps {
   player: {
     loading: boolean
-    engine: PlaybackEngine
+    engine: React.MutableRefObject<AudioPlayer>
     currentStep: number
     totalStep: number
     setCurrentStep: (val: number) => void
@@ -22,25 +22,25 @@ export const ScorePlayer = ({ player }: ScorePlayerProps) => {
 
   function handleReset() {
     setPlaying(false)
-    player.engine.stop()
+    player.engine.current.stop()
     player.setCurrentStep(0)
   }
 
   function handlePause() {
     setPlaying(false)
-    player.engine.pause()
+    player.engine.current.pause()
   }
 
   function handlePlay() {
     setPlaying(true)
     setTriggered(true)
-    player.engine.play()
+    player.engine.current.play()
   }
 
   function handleJump(val: number) {
-    player.engine.jumpToStep(val)
+    player.engine.current.jumpToStep(val)
     player.setCurrentStep(val)
-    player.engine.play()
+    player.engine.current.play()
   }
 
   return (

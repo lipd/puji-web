@@ -18,6 +18,6 @@ export const useRequest = () => {
     } else {
       requestConfig = config
     }
-    return request(config)
+    return request(requestConfig)
   }
 }

@@ -3,6 +3,7 @@ import { Bookcard, CARD_SIZE } from './bookcard'
 import { Header } from './header'
 import { Pagination } from 'antd'
 import { Score } from 'types'
+import { Link } from 'react-router-dom'
 
 export const Bookcase = ({ scores }: { scores: Score[] }) => {
   return (
@@ -11,7 +12,9 @@ export const Bookcase = ({ scores }: { scores: Score[] }) => {
       <Wrapper>
         <BookcardGroup>
           {scores.map((score) => (
-            <Bookcard key={score.id} score={score} />
+            <Link key={score._id} to={`/score/${score._id}`}>
+              <Bookcard score={score} />
+            </Link>
           ))}
         </BookcardGroup>
       </Wrapper>

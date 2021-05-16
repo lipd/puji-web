@@ -1,30 +1,34 @@
-import { useEffect, useState, RefObject } from 'react'
+import { useEffect, useState, RefObject, useRef } from 'react'
 import { OpenSheetMusicDisplay as OSMD } from 'opensheetmusicdisplay'
 import AudioPlayer from 'osmd-audio-player'
 import axios from 'axios'
 import { PlaybackEvent } from 'osmd-audio-player/dist/PlaybackEngine'
+import { Score } from 'types'
 
 interface useScoreParams {
   scoreRef: RefObject<HTMLDivElement>
+  scoreData: Score | null
 }
-export const useScore = ({ scoreRef }: useScoreParams) => {
+export const useScore = ({ scoreRef, scoreData }: useScoreParams) => {
   const [rendererLoading, setRendererLoading] = useState(true)
   const [osmd, setOSMD] = useState<null | OSMD>(null)
 
   const [playerLoading, setPlayerLoading] = useState(true)
-  const [engine] = useState(() => new AudioPlayer())
+  const playerLoaded = useRef(false)
+  const engine = useRef(new AudioPlayer())
+
   const [currentStep, setCurrentStep] = useState(0)
   const [totalStep, setTotalStep] = useState(0)
 
   useEffect(() => {
-    async function init() {
+    async function init(url: string) {
       const osmd = new OSMD(scoreRef.current as any, {
         backend: 'svg',
         drawTitle: true,
         autoResize: false,
       })
 
-      const xml = await axios.get('http://localhost:3000/MozaVeilSample.xml')
+      const xml = await axios.get(url)
       await osmd.load(xml.data)
 
       osmd.zoom = 0.6
@@ -32,17 +36,27 @@ export const useScore = ({ scoreRef }: useScoreParams) => {
       setOSMD(osmd)
       setRendererLoading(false)
 
-      await engine.loadScore(osmd as any)
+      await engine.current.loadScore(osmd as any)
 
-      setTotalStep((engine as any).iterationSteps)
-      engine.on(PlaybackEvent.ITERATION, () => {
-        setCurrentStep((engine as any).currentIterationStep)
+      setTotalStep((engine.current as any).iterationSteps)
+      engine.current.on(PlaybackEvent.ITERATION, () => {
+        setCurrentStep((engine.current as any).currentIterationStep)
       })
 
       setPlayerLoading(false)
+      playerLoaded.current = true
     }
-    init()
-  }, [engine, scoreRef])
+
+    if (scoreData) init(scoreData.xmlUrl)
+
+    const engineTarget = engine.current
+    return () => {
+      if (playerLoaded.current) {
+        engineTarget.stop()
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scoreData])
 
   return {
     renderer: {

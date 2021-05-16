@@ -1,5 +1,5 @@
 export interface Score {
-  id: number
+  _id: number
   name: string
   uploader: {
     avatar: string
@@ -14,6 +14,9 @@ export interface Score {
   description: string
   favorite: number
   like: number
+  createdAt: string
+  updatedAt: string
+  xmlUrl: string
 }
 
 export interface User {

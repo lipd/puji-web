@@ -2,16 +2,32 @@ import styled from '@emotion/styled'
 import { Score } from 'components/score'
 import { ScorePlayer } from 'components/score/score-player'
 import { useScore } from 'components/score/useScore'
+import { useMount } from 'hooks/use-mount'
+import { useRequest } from 'hooks/use-request'
 import { Layout } from 'layout'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { color } from 'style/color'
-import { useRequest } from 'utils/hooks/useRequest'
+import { Score as ScoreType } from 'types'
 import { MessagePanel } from './message-panel'
 
 export const ScoreScreen = () => {
+  const { id } = useParams<{ id: string }>()
   const scoreRef = useRef(null)
-  const { renderer, player } = useScore({ scoreRef })
-  const { res: score, loading } = useRequest({ url: 'scores/1' }, {})
+  const [scoreData, setScoreData] = useState<null | ScoreType>(null)
+  const [loading, setLoading] = useState(true)
+  const request = useRequest()
+  const { renderer, player } = useScore({ scoreRef, scoreData })
+
+  useMount(() => {
+    request({
+      url: `scores/${id}`,
+    }).then((res) => {
+      setScoreData(res.data)
+      setLoading(false)
+    })
+  })
+
   return (
     <Layout footer={false}>
       <Container>
@@ -22,7 +38,7 @@ export const ScoreScreen = () => {
           <Score renderer={renderer} scoreRef={scoreRef} />
         </Left>
         <Right>
-          <MessagePanel score={score} loading={loading} />
+          <MessagePanel score={scoreData} loading={loading} />
         </Right>
       </Container>
     </Layout>
