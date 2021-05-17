@@ -1,8 +1,9 @@
 import styled from '@emotion/styled'
-import { Button, Card, Form, Input, message, Select } from 'antd'
+import { Card, Form, Input, message, Select } from 'antd'
 import { InboxOutlined } from '@ant-design/icons'
 import Dragger from 'antd/lib/upload/Dragger'
 import { UploadChangeParam } from 'antd/lib/upload'
+import { SubmitButton } from 'components/button'
 import { useState } from 'react'
 import { useRequest } from 'hooks/use-request'
 import { useHistory } from 'react-router'
@@ -194,11 +195,4 @@ const Container = styled(Card)`
   .ant-form-item-label {
     font-weight: 500;
   }
-`
-
-const SubmitButton = styled(Button)`
-  display: block;
-  margin: 1rem auto 0;
-  width: 60%;
-  border-radius: 2rem;
 `

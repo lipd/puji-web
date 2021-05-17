@@ -9,6 +9,7 @@ interface AuthContextValue {
   login: (from: AuthForm) => Promise<void>
   register: (from: AuthForm) => Promise<void>
   logout: () => void
+  setUser: React.Dispatch<React.SetStateAction<User | null>>
 }
 
 export const AuthContext = React.createContext<AuthContextValue | null>(null)
@@ -32,7 +33,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       })
         .then((res) => {
           const user = res.data
-          setUser(user)
+          setUser({ ...user, token })
         })
         .catch(() => {
           message.error('自动登录失败')
@@ -43,7 +44,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   return (
     <AuthContext.Provider
       children={children}
-      value={{ user, login, register, logout }}
+      value={{ user, login, register, logout, setUser }}
     />
   )
 }
