@@ -36,8 +36,12 @@ export const useFilter = (originalFilters: FilterDataType[]) => {
     newFilters[index].values = values
     setState(newFilters)
   }
+  const filterQuery = filters
+    .filter((each) => each.values.length !== 0)
+    .map((each) => `${each.name}=${each.values.join(',')}`)
+    .join('&')
 
-  return [filters, setFilter] as const
+  return [filters, filterQuery, setFilter] as const
 }
 
 export const Filter = ({

@@ -1,16 +1,16 @@
 import styled from '@emotion/styled'
 import { Bookcase } from 'components/bookcase'
-import { useMount } from 'hooks/use-mount'
 import { useRequest } from 'hooks/use-request'
 import { Layout } from 'layout'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useHistory } from 'react-router'
 import { color } from 'style/color'
 import { Score } from 'types'
 import { Filter, FilterDataType, useFilter } from './filter'
 
 const filterData: FilterDataType[] = [
   {
-    name: 'license',
+    name: 'licenses',
     title: '版权许可',
     options: [
       { label: '允许修改', value: 'to-change' },
@@ -20,7 +20,7 @@ const filterData: FilterDataType[] = [
     ],
   },
   {
-    name: 'instrument',
+    name: 'instruments',
     title: '乐器',
     options: [
       { label: '键盘', value: 'keyboard' },
@@ -33,7 +33,7 @@ const filterData: FilterDataType[] = [
     ],
   },
   {
-    name: 'genre',
+    name: 'genres',
     title: '风格',
     options: [
       { label: '古典', value: 'classical' },
@@ -49,15 +49,17 @@ const filterData: FilterDataType[] = [
 ]
 
 export const DiscoverScreen = () => {
-  const [filterState, setFilterState] = useFilter(filterData)
+  const [filterState, filterQuery, setFilterState] = useFilter(filterData)
   const request = useRequest()
+  const history = useHistory()
   const [scores, setScores] = useState<Score[]>([])
 
-  useMount(() => {
-    request({ url: '/scores' }).then((res) => {
+  useEffect(() => {
+    request({ url: `/scores?${filterQuery}` }).then((res) => {
       setScores(res.data)
+      history.push({ search: filterQuery })
     })
-  })
+  }, [filterQuery])
 
   return (
     <Layout>
