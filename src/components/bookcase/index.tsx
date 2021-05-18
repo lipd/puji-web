@@ -10,15 +10,24 @@ interface BookcaseProps {
   total: number
   page: number
   setPage: (page: number) => void
+  order: number
+  setOrder: (order: number) => void
 }
-export const Bookcase = ({ scores, total, page, setPage }: BookcaseProps) => {
+export const Bookcase = ({
+  scores,
+  total,
+  page,
+  setPage,
+  order,
+  setOrder,
+}: BookcaseProps) => {
   const handleChangePage = (page: number) => {
     setPage(page)
   }
 
   return (
     <Container>
-      <Header keyword="Sonata" />
+      <Header keyword="Sonata" order={order} setOrder={setOrder} />
       <Wrapper>
         <BookcardGroup>
           {scores.map((score) => (

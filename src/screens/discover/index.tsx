@@ -62,16 +62,18 @@ export const DiscoverScreen = () => {
     total: 0,
   })
   const [page, setPage] = useState(1)
+  const [order, setOrder] = useState(0)
 
   useEffect(() => {
     const pageQuery = page > 1 ? `page=${page}&` : ''
-    const query = pageQuery + filterQuery
+    const orderQuery = order > 0 ? `order=${order}&` : ''
+    const query = pageQuery + orderQuery + filterQuery
     request({ url: `/scores?${query}` }).then((res) => {
       setScoreData(res.data)
       history.push({ search: query })
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterQuery, page])
+  }, [filterQuery, page, order])
 
   return (
     <Layout>
@@ -90,6 +92,8 @@ export const DiscoverScreen = () => {
             total={scoreData.total}
             page={page}
             setPage={setPage}
+            order={order}
+            setOrder={setOrder}
           />
         </Main>
       </Page>

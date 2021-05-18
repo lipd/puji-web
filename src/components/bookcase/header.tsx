@@ -3,21 +3,26 @@ import styled from '@emotion/styled'
 import { ReactComponent as Sort } from 'assets/sort.svg'
 import { color } from 'style/color'
 
-const menu = (
-  <Menu>
-    <Menu.Item key="0">默认排序</Menu.Item>
-    <Menu.Item key="1">从早到晚排序</Menu.Item>
-    <Menu.Item key="2">从晚到早降序</Menu.Item>
-    <Menu.Item key="3">按点赞数排序</Menu.Item>
-    <Menu.Item key="4">按收藏数排序</Menu.Item>
-  </Menu>
-)
+const orderList = ['默认', '从早到晚', '从晚到早', '按点赞数', '按收藏数']
 
 type HeaderProps = {
   keyword?: string
-  filter?: string
+  order: number
+  setOrder: (order: number) => void
 }
-export const Header = ({ keyword, filter }: HeaderProps) => {
+export const Header = ({ keyword, order, setOrder }: HeaderProps) => {
+  const handleClick = ({ key }: any) => {
+    setOrder(key)
+  }
+
+  const menu = (
+    <Menu onClick={handleClick}>
+      {orderList.map((each, i) => (
+        <Menu.Item key={i}>{each}</Menu.Item>
+      ))}
+    </Menu>
+  )
+
   return (
     <Container>
       <Left>
@@ -29,7 +34,8 @@ export const Header = ({ keyword, filter }: HeaderProps) => {
         <Dropdown overlay={menu} trigger={['click']}>
           <Sorter type="link">
             <SorterText>
-              排序方式：<span style={{ color: color.primary }}>默认</span>
+              排序方式：
+              <span style={{ color: color.primary }}>{orderList[order]}</span>
             </SorterText>
             <SortIcon width="2rem" height="2rem" />
           </Sorter>
