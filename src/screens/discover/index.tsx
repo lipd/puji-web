@@ -48,18 +48,30 @@ const filterData: FilterDataType[] = [
   },
 ]
 
+interface ScoreData {
+  content: Score[]
+  total: number
+}
+
 export const DiscoverScreen = () => {
   const [filterState, filterQuery, setFilterState] = useFilter(filterData)
   const request = useRequest()
   const history = useHistory()
-  const [scores, setScores] = useState<Score[]>([])
+  const [scoreData, setScoreData] = useState<ScoreData>({
+    content: [],
+    total: 0,
+  })
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
-    request({ url: `/scores?${filterQuery}` }).then((res) => {
-      setScores(res.data)
-      history.push({ search: filterQuery })
+    const pageQuery = page > 1 ? `page=${page}&` : ''
+    const query = pageQuery + filterQuery
+    request({ url: `/scores?${query}` }).then((res) => {
+      setScoreData(res.data)
+      history.push({ search: query })
     })
-  }, [filterQuery])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterQuery, page])
 
   return (
     <Layout>
@@ -73,7 +85,12 @@ export const DiscoverScreen = () => {
           />
         </Sidebar>
         <Main>
-          <Bookcase scores={scores} />
+          <Bookcase
+            scores={scoreData.content}
+            total={scoreData.total}
+            page={page}
+            setPage={setPage}
+          />
         </Main>
       </Page>
     </Layout>

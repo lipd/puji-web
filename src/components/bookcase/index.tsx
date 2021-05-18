@@ -5,7 +5,17 @@ import { Pagination } from 'antd'
 import { Score } from 'types'
 import { Link } from 'react-router-dom'
 
-export const Bookcase = ({ scores }: { scores: Score[] }) => {
+interface BookcaseProps {
+  scores: Score[]
+  total: number
+  page: number
+  setPage: (page: number) => void
+}
+export const Bookcase = ({ scores, total, page, setPage }: BookcaseProps) => {
+  const handleChangePage = (page: number) => {
+    setPage(page)
+  }
+
   return (
     <Container>
       <Header keyword="Sonata" />
@@ -19,12 +29,14 @@ export const Bookcase = ({ scores }: { scores: Score[] }) => {
         </BookcardGroup>
       </Wrapper>
       <Bottom>
-        <Pagination
-          defaultCurrent={1}
-          pageSize={9}
-          total={20}
-          hideOnSinglePage
-        />
+        {total > 0 && (
+          <Pagination
+            current={page}
+            pageSize={9}
+            total={total}
+            onChange={handleChangePage}
+          />
+        )}
       </Bottom>
     </Container>
   )
