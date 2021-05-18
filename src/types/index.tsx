@@ -10,7 +10,7 @@ export interface Score {
   author: string
   instruments: string[]
   genres: string[]
-  lisences: string[]
+  licenses: string[]
   description: string
   favorite: number
   like: number

@@ -19,7 +19,7 @@ export const MessagePanel = ({ score, loading }: MessagePanelProp) => {
       { key: '作者', value: score.author },
       { key: '乐器', value: score.instruments },
       { key: '风格', value: score.genres },
-      { key: '许可', value: score.lisences },
+      { key: '许可', value: score.licenses },
     ]
   }
 

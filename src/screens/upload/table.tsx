@@ -155,7 +155,7 @@ export const Table = () => {
 
         <Form.Item
           label="许可"
-          name="lisences"
+          name="licenses"
           initialValue={[
             'to-change',
             'to-commertial',

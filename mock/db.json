@@ -10,10 +10,10 @@
         "avatar": "https://cdn.dribbble.com/users/2128900/avatars/normal/data?1518354207",
         "name": "李佩道"
       },
-      "instrument": ["钢琴", "小提琴", "声乐", "二胡"],
+      "instruments": ["钢琴", "小提琴", "声乐", "二胡"],
       "createAt": 1620305704365,
-      "genre": ["流行", "电子", "世界音乐", "其他"],
-      "lisence": ["可商用", "可修改", "可分享", "个人使用"],
+      "genres": ["流行", "电子", "世界音乐", "其他"],
+      "licenses": ["可商用", "可修改", "可分享", "个人使用"],
       "description": "My piano sheet is suitable for those with small hand / short finger. I am an anime lover from somewhere. Please do support my musescore if you like my piano arrangement. Thank you! (●♡◡♡●)",
       "favorite": 23,
       "like": 231
@@ -28,10 +28,10 @@
         "avatar": "https://cdn.dribbble.com/users/2128900/avatars/normal/data?1518354207",
         "name": "李佩道"
       },
-      "instrument": ["钢琴", "小提琴", "声乐", "二胡"],
+      "instruments": ["钢琴", "小提琴", "声乐", "二胡"],
       "createAt": 1620305704365,
-      "genre": ["流行", "电子", "世界音乐", "其他"],
-      "lisence": ["可商用", "可修改", "可分享", "个人使用"],
+      "genres": ["流行", "电子", "世界音乐", "其他"],
+      "licenses": ["可商用", "可修改", "可分享", "个人使用"],
       "description": "My piano sheet is suitable for those with small hand / short finger. I am an anime lover from somewhere. Please do support my musescore if you like my piano arrangement. Thank you! (●♡◡♡●)",
       "favorite": 23,
       "like": 231
@@ -46,10 +46,10 @@
         "avatar": "https://cdn.dribbble.com/users/2128900/avatars/normal/data?1518354207",
         "name": "李佩道"
       },
-      "instrument": ["钢琴", "小提琴", "声乐", "二胡"],
+      "instruments": ["钢琴", "小提琴", "声乐", "二胡"],
       "createAt": 1620305704365,
-      "genre": ["流行", "电子", "世界音乐", "其他"],
-      "lisence": ["可商用", "可修改", "可分享", "个人使用"],
+      "genres": ["流行", "电子", "世界音乐", "其他"],
+      "licenses": ["可商用", "可修改", "可分享", "个人使用"],
       "description": "My piano sheet is suitable for those with small hand / short finger. I am an anime lover from somewhere. Please do support my musescore if you like my piano arrangement. Thank you! (●♡◡♡●)",
       "favorite": 23,
       "like": 231
