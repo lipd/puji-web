@@ -1,21 +1,22 @@
 import styled from '@emotion/styled'
 import { Bookcase } from 'components/bookcase'
 import { useRequest } from 'hooks/use-request'
-import { useQuery } from 'hooks/useQuery'
 import { Layout } from 'layout'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { color } from 'style/color'
 import { Score } from 'types'
 import { Filter, useFilter } from 'components/filter'
+import { useAuth } from 'hooks/use-auth'
 
 interface ScoreData {
   content: Score[]
   total: number
 }
 
-export const DiscoverScreen = () => {
+export const MineScreen = () => {
   const [filterState, filterQuery, setFilterState] = useFilter()
+  const { user } = useAuth()
   const request = useRequest()
   const history = useHistory()
   const [scoreData, setScoreData] = useState<ScoreData>({
@@ -24,20 +25,20 @@ export const DiscoverScreen = () => {
   })
   const [page, setPage] = useState(1)
   const [order, setOrder] = useState(0)
-  const urlQuery = useQuery()
-  const q = urlQuery.get('q') || ''
 
   useEffect(() => {
-    const searchQuery = q ? `q=${q}&` : ''
+    if (!user) return
+
     const pageQuery = page > 1 ? `page=${page}&` : ''
     const orderQuery = order > 0 ? `order=${order}&` : ''
-    const query = searchQuery + pageQuery + orderQuery + filterQuery
-    request({ url: `/scores?${query}` }).then((res) => {
+    const query = pageQuery + orderQuery + filterQuery
+
+    request({ url: `/scores/mine?${query}` }).then((res) => {
       setScoreData(res.data)
       history.push({ search: query })
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterQuery, page, order])
+  }, [user, filterQuery, page, order])
 
   return (
     <Layout>
@@ -48,7 +49,7 @@ export const DiscoverScreen = () => {
         </Sidebar>
         <Main>
           <Bookcase
-            keyword={q}
+            keyword=""
             scores={scoreData.content}
             total={scoreData.total}
             page={page}
