@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { Bookcase } from 'components/bookcase'
 import { useRequest } from 'hooks/use-request'
+import { useQuery } from 'hooks/useQuery'
 import { Layout } from 'layout'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
@@ -63,11 +64,14 @@ export const DiscoverScreen = () => {
   })
   const [page, setPage] = useState(1)
   const [order, setOrder] = useState(0)
+  const urlQuery = useQuery()
+  const q = urlQuery.get('q') || ''
 
   useEffect(() => {
+    const searchQuery = q ? `q=${q}&` : ''
     const pageQuery = page > 1 ? `page=${page}&` : ''
     const orderQuery = order > 0 ? `order=${order}&` : ''
-    const query = pageQuery + orderQuery + filterQuery
+    const query = searchQuery + pageQuery + orderQuery + filterQuery
     request({ url: `/scores?${query}` }).then((res) => {
       setScoreData(res.data)
       history.push({ search: query })
@@ -88,6 +92,7 @@ export const DiscoverScreen = () => {
         </Sidebar>
         <Main>
           <Bookcase
+            keyword={q}
             scores={scoreData.content}
             total={scoreData.total}
             page={page}

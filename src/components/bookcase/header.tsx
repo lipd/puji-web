@@ -26,9 +26,11 @@ export const Header = ({ keyword, order, setOrder }: HeaderProps) => {
   return (
     <Container>
       <Left>
-        <Hint>
-          以下为关键词 <Keyword>{keyword}</Keyword> 的搜索结果
-        </Hint>
+        {keyword && (
+          <Hint>
+            以下为关键词 <Keyword>{keyword}</Keyword> 的搜索结果
+          </Hint>
+        )}
       </Left>
       <Right>
         <Dropdown overlay={menu} trigger={['click']}>

@@ -6,6 +6,7 @@ import { Score } from 'types'
 import { Link } from 'react-router-dom'
 
 interface BookcaseProps {
+  keyword: string
   scores: Score[]
   total: number
   page: number
@@ -14,6 +15,7 @@ interface BookcaseProps {
   setOrder: (order: number) => void
 }
 export const Bookcase = ({
+  keyword,
   scores,
   total,
   page,
@@ -27,7 +29,7 @@ export const Bookcase = ({
 
   return (
     <Container>
-      <Header keyword="Sonata" order={order} setOrder={setOrder} />
+      <Header keyword={keyword} order={order} setOrder={setOrder} />
       <Wrapper>
         <BookcardGroup>
           {scores.map((score) => (

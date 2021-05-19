@@ -1,12 +1,23 @@
 import styled from '@emotion/styled'
 import { ReactComponent as Icon } from 'assets/search.svg'
 import { useState } from 'react'
+import { useHistory } from 'react-router'
 import { color } from 'style/color'
 
 const REMIND_TEXT = '乐谱名称 & 作者'
 
 export const Searcher = () => {
   const [isFocus, setIsFocus] = useState(false)
+  const history = useHistory()
+
+  const handleKeyPress = (e: any) => {
+    if (e.key === 'Enter') {
+      const q = e.target.value
+      const query = q ? `?q=${q}` : ''
+      window.location.href = '/' + query
+    }
+  }
+
   return (
     <Container>
       <IconBox>
@@ -23,6 +34,7 @@ export const Searcher = () => {
           e.target.placeholder = REMIND_TEXT
           setIsFocus(false)
         }}
+        onKeyPress={handleKeyPress}
       />
     </Container>
   )
