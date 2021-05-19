@@ -58,8 +58,8 @@ export const Header = () => {
         <Link to="/">
           <NavItem>首页</NavItem>
         </Link>
-        <Link to="/collection">
-          <NavItem>收藏</NavItem>
+        <Link to="/favorites">
+          <NavItem>收藏夹</NavItem>
         </Link>
         <Link to="/mine">
           <NavItem>我的乐谱</NavItem>

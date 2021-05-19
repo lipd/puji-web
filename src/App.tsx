@@ -6,6 +6,7 @@ import { AuthScreen } from 'screens/auth'
 import { UploadScreen } from 'screens/upload'
 import { UserScreen } from 'screens/user'
 import { MineScreen } from 'screens/mine'
+import { FavoritesScreen } from 'screens/favorties'
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
         </Route>
         <Route path="/mine">
           <MineScreen />
+        </Route>
+        <Route path="/favorites">
+          <FavoritesScreen />
         </Route>
         <Route path="/">
           <DiscoverScreen />
