@@ -64,16 +64,32 @@ export const ActionPanel = ({
     }
   }
 
-  const handleFavroite = () => {
+  const handleFavroite = async () => {
     if (!user) {
       return message.warning('收藏前请先登录')
     }
 
-    setFavorited(true)
+    try {
+      await request({
+        url: `/users/favorite/${id}`,
+        method: 'PUT',
+      })
+      setLiked(true)
+    } catch (err) {
+      message.error('收藏失败')
+    }
   }
 
-  const handleUnfavroite = () => {
-    setFavorited(false)
+  const handleUnfavroite = async () => {
+    try {
+      await request({
+        url: `/users/favorite/${id}`,
+        method: 'DELETE',
+      })
+      setLiked(false)
+    } catch (err) {
+      message.error('取消收藏失败')
+    }
   }
 
   const handleDownload = (url: string, filename: string) => {
