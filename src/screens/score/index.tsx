@@ -11,6 +11,10 @@ import { color } from 'style/color'
 import { Score as ScoreType } from 'types'
 import { MessagePanel } from './message-panel'
 
+interface UserStatus {
+  liked: boolean
+  favorited: boolean
+}
 export const ScoreScreen = () => {
   const { id } = useParams<{ id: string }>()
   const scoreRef = useRef(null)

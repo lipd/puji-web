@@ -6,6 +6,7 @@ import { color } from 'style/color'
 import { Score } from 'types'
 import { Skeleton } from 'antd'
 import { MetaItem } from './meta'
+import { useState } from 'react'
 
 interface MessagePanelProp {
   score: Score | null
@@ -23,6 +24,9 @@ export const MessagePanel = ({
   favorited,
   setFavorited,
 }: MessagePanelProp) => {
+  const [likeAdd, setLikeAdd] = useState(0)
+  const [favoriteAdd, setFavoriteAdd] = useState(0)
+
   let meta
   if (score) {
     meta = [
@@ -34,8 +38,6 @@ export const MessagePanel = ({
     ]
   }
 
-  const likeAdd = liked ? 1 : 0
-  const favoriteAdd = favorited ? 1 : 0
   return (
     <Container>
       <Skeleton loading={loading} paragraph={{ rows: 16 }}>
@@ -58,6 +60,8 @@ export const MessagePanel = ({
               setLiked={setLiked}
               favorited={favorited}
               setFavorited={setFavorited}
+              setLikeAdd={setLikeAdd}
+              setFavoriteAdd={setFavoriteAdd}
             />
             <Meta data={meta as MetaItem[]} />
             <Discription>{score.description}</Discription>

@@ -24,6 +24,8 @@ interface ActionPanelProps {
   setLiked: (value: boolean) => void
   favorited: boolean
   setFavorited: (value: boolean) => void
+  setLikeAdd: React.Dispatch<React.SetStateAction<number>>
+  setFavoriteAdd: React.Dispatch<React.SetStateAction<number>>
 }
 export const ActionPanel = ({
   score,
@@ -31,6 +33,8 @@ export const ActionPanel = ({
   setLiked,
   favorited,
   setFavorited,
+  setLikeAdd,
+  setFavoriteAdd,
 }: ActionPanelProps) => {
   const request = useRequest()
   const { user } = useAuth()
@@ -47,6 +51,7 @@ export const ActionPanel = ({
         method: 'PUT',
       })
       setLiked(true)
+      setLikeAdd((prev) => prev + 1)
     } catch (err) {
       message.error('点赞失败')
     }
@@ -59,6 +64,7 @@ export const ActionPanel = ({
         method: 'DELETE',
       })
       setLiked(false)
+      setLikeAdd((prev) => prev - 1)
     } catch (err) {
       message.error('取消点赞失败')
     }
@@ -75,6 +81,7 @@ export const ActionPanel = ({
         method: 'PUT',
       })
       setFavorited(true)
+      setFavoriteAdd((prev) => prev + 1)
     } catch (err) {
       message.error('收藏失败')
     }
@@ -87,6 +94,7 @@ export const ActionPanel = ({
         method: 'DELETE',
       })
       setFavorited(false)
+      setFavoriteAdd((prev) => prev - 1)
     } catch (err) {
       message.error('取消收藏失败')
     }
