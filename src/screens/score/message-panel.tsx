@@ -53,6 +53,7 @@ export const MessagePanel = ({
               <AvatarName>{score.uploader?.name}</AvatarName>
             </Uploader>
             <ActionPanel
+              score={score}
               liked={liked}
               setLiked={setLiked}
               favorited={favorited}

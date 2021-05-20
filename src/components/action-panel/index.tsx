@@ -1,3 +1,11 @@
+import styled from '@emotion/styled'
+import { color } from 'style/color'
+import { useRequest } from 'hooks/use-request'
+import { useParams } from 'react-router'
+import { message } from 'antd'
+import { useAuth } from 'hooks/use-auth'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import fileDownload from 'js-file-download'
 import { ReactComponent as LikeIcon } from 'assets/like.svg'
 import { ReactComponent as LikeFillIcon } from 'assets/like-fill.svg'
 import { ReactComponent as FavoriteIcon } from 'assets/favorite.svg'
@@ -5,20 +13,18 @@ import { ReactComponent as FavoriteFillIcon } from 'assets/favorite-fill.svg'
 import { ReactComponent as DownloadIcon } from 'assets/download.svg'
 import { ReactComponent as PrintIcon } from 'assets/print.svg'
 import { ReactComponent as ShareIcon } from 'assets/share.svg'
-import styled from '@emotion/styled'
-import { color } from 'style/color'
-import { useRequest } from 'hooks/use-request'
-import { useParams } from 'react-router'
-import { message } from 'antd'
-import { useAuth } from 'hooks/use-auth'
+import { Score } from 'types'
+import axios from 'axios'
 
 interface ActionPanelProps {
+  score: Score | null
   liked: boolean
   setLiked: (value: boolean) => void
   favorited: boolean
   setFavorited: (value: boolean) => void
 }
 export const ActionPanel = ({
+  score,
   liked,
   setLiked,
   favorited,
@@ -68,6 +74,16 @@ export const ActionPanel = ({
     setFavorited(false)
   }
 
+  const handleDownload = (url: string, filename: string) => {
+    axios.get(url, { responseType: 'blob' }).then((res) => {
+      fileDownload(res.data, filename + '.xml')
+    })
+  }
+
+  const handleCopy = () => {
+    message.success('链接已复制')
+  }
+
   return (
     <Container>
       {liked ? (
@@ -80,8 +96,18 @@ export const ActionPanel = ({
       ) : (
         <FavoriteIcon className="icon" onClick={handleFavroite} />
       )}
-      <DownloadIcon className="icon" />
-      <ShareIcon className="icon" />
+      <DownloadIcon
+        className="icon"
+        onClick={() =>
+          handleDownload(score?.xmlUrl as string, score?.name as string)
+        }
+      />
+      <CopyToClipboard
+        text={score?.name + ': ' + window.location.href}
+        onCopy={handleCopy}
+      >
+        <ShareIcon className="icon" />
+      </CopyToClipboard>
       <PrintIcon className="icon" />
     </Container>
   )
