@@ -24,9 +24,9 @@ export const Bookcard = ({ score }: { score: Score }) => {
         </Top>
         <Bottom>
           <FavoriteIcon className="icon" />
-          <BottomText>{score.favorite}</BottomText>
+          <BottomText>{score.favorites}</BottomText>
           <LikeIcon className="icon like" />
-          <BottomText>{score.like}</BottomText>
+          <BottomText>{score.likes}</BottomText>
         </Bottom>
       </Meta>
     </Container>

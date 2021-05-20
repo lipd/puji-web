@@ -5,4 +5,5 @@ export const color = {
   somber: '#454545',
   grey: '#8792a6',
   greyLight: '#e0e0e0',
+  pink: '#f64792',
 }

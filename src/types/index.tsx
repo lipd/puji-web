@@ -12,8 +12,8 @@ export interface Score {
   genres: string[]
   licenses: string[]
   description: string
-  favorite: number
-  like: number
+  favorites: number
+  likes: number
   createdAt: string
   updatedAt: string
   xmlUrl: string

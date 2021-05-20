@@ -11,7 +11,6 @@ import { color } from 'style/color'
 export const Grade = ({
   like,
   favorite,
-  star,
 }: {
   like: number
   favorite: any

@@ -10,8 +10,19 @@ import { MetaItem } from './meta'
 interface MessagePanelProp {
   score: Score | null
   loading: boolean
+  liked: boolean
+  setLiked: (value: boolean) => void
+  favorited: boolean
+  setFavorited: (value: boolean) => void
 }
-export const MessagePanel = ({ score, loading }: MessagePanelProp) => {
+export const MessagePanel = ({
+  score,
+  loading,
+  liked,
+  setLiked,
+  favorited,
+  setFavorited,
+}: MessagePanelProp) => {
   let meta
   if (score) {
     meta = [
@@ -23,19 +34,30 @@ export const MessagePanel = ({ score, loading }: MessagePanelProp) => {
     ]
   }
 
+  const likeAdd = liked ? 1 : 0
+  const favoriteAdd = favorited ? 1 : 0
   return (
     <Container>
       <Skeleton loading={loading} paragraph={{ rows: 16 }}>
         {score && (
           <>
             <Title>{score.name}</Title>
-            <Grade like={score.like} favorite={score.favorite} star={5} />
+            <Grade
+              like={score.likes + likeAdd}
+              favorite={score.favorites + favoriteAdd}
+              star={5}
+            />
             <Divider />
             <Uploader>
               <Avatar src={score.uploader?.avatar} />
               <AvatarName>{score.uploader?.name}</AvatarName>
             </Uploader>
-            <ActionPanel />
+            <ActionPanel
+              liked={liked}
+              setLiked={setLiked}
+              favorited={favorited}
+              setFavorited={setFavorited}
+            />
             <Meta data={meta as MetaItem[]} />
             <Discription>{score.description}</Discription>
           </>

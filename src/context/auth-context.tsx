@@ -4,8 +4,11 @@ import { AuthForm, User } from 'types'
 import * as auth from 'utils/auth'
 import { request } from 'utils/request'
 
+type Status = 'waiting' | 'no-auth' | 'loading' | 'loaded'
+
 interface AuthContextValue {
   user: User | null
+  status: Status
   login: (from: AuthForm) => Promise<void>
   register: (from: AuthForm) => Promise<void>
   logout: () => void
@@ -17,6 +20,7 @@ AuthContext.displayName = 'AuthContext'
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null)
+  const [status, setStatus] = useState<Status>('waiting')
   const login = (form: AuthForm) => auth.login(form).then(setUser)
   const register = (form: AuthForm) => auth.register(form).then(setUser)
   const logout = () => auth.logout()
@@ -24,6 +28,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   useEffect(() => {
     const token = auth.getToken()
     if (token) {
+      setStatus('loading')
       request({
         url: '/me',
         method: 'POST',
@@ -34,17 +39,21 @@ export const AuthProvider: React.FC = ({ children }) => {
         .then((res) => {
           const user = res.data
           setUser({ ...user, token })
+          setStatus('loaded')
         })
         .catch(() => {
           message.error('自动登录失败')
+          setStatus('no-auth')
         })
+    } else {
+      setStatus('no-auth')
     }
   }, [])
 
   return (
     <AuthContext.Provider
       children={children}
-      value={{ user, login, register, logout, setUser }}
+      value={{ user, status, login, register, logout, setUser }}
     />
   )
 }
