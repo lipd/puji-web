@@ -6,8 +6,8 @@ import { message } from 'antd'
 import { useAuth } from 'hooks/use-auth'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import fileDownload from 'js-file-download'
-import { jsPDF } from 'jspdf'
-import 'svg2pdf.js'
+// @ts-ignore
+import { saveSvgAsPng } from 'save-svg-as-png'
 import { ReactComponent as LikeIcon } from 'assets/like.svg'
 import { ReactComponent as LikeFillIcon } from 'assets/like-fill.svg'
 import { ReactComponent as FavoriteIcon } from 'assets/favorite.svg'
@@ -74,7 +74,7 @@ export const ActionPanel = ({
         url: `/users/favorite/${id}`,
         method: 'PUT',
       })
-      setLiked(true)
+      setFavorited(true)
     } catch (err) {
       message.error('收藏失败')
     }
@@ -86,7 +86,7 @@ export const ActionPanel = ({
         url: `/users/favorite/${id}`,
         method: 'DELETE',
       })
-      setLiked(false)
+      setFavorited(false)
     } catch (err) {
       message.error('取消收藏失败')
     }
@@ -104,12 +104,7 @@ export const ActionPanel = ({
 
   const handlePrint = async (filename: string) => {
     const svgElement = document.getElementById('osmdSvgPage1') as HTMLElement
-    const positionInfo = svgElement.getBoundingClientRect()
-    const width = positionInfo.width
-    const height = positionInfo.height
-    const pdf = new jsPDF(width > height ? 'l' : 'p', 'pt', [height, width])
-    await pdf.svg(svgElement, { width, height })
-    pdf.save(filename)
+    await saveSvgAsPng(svgElement, filename, { backgroundColor: '#ffffff' })
   }
 
   return (
