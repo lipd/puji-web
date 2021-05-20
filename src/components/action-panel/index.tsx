@@ -6,6 +6,8 @@ import { message } from 'antd'
 import { useAuth } from 'hooks/use-auth'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import fileDownload from 'js-file-download'
+import { jsPDF } from 'jspdf'
+import 'svg2pdf.js'
 import { ReactComponent as LikeIcon } from 'assets/like.svg'
 import { ReactComponent as LikeFillIcon } from 'assets/like-fill.svg'
 import { ReactComponent as FavoriteIcon } from 'assets/favorite.svg'
@@ -84,6 +86,16 @@ export const ActionPanel = ({
     message.success('链接已复制')
   }
 
+  const handlePrint = async (filename: string) => {
+    const svgElement = document.getElementById('osmdSvgPage1') as HTMLElement
+    const positionInfo = svgElement.getBoundingClientRect()
+    const width = positionInfo.width
+    const height = positionInfo.height
+    const pdf = new jsPDF(width > height ? 'l' : 'p', 'pt', [height, width])
+    await pdf.svg(svgElement, { width, height })
+    pdf.save(filename)
+  }
+
   return (
     <Container>
       {liked ? (
@@ -108,7 +120,10 @@ export const ActionPanel = ({
       >
         <ShareIcon className="icon" />
       </CopyToClipboard>
-      <PrintIcon className="icon" />
+      <PrintIcon
+        className="icon"
+        onClick={() => handlePrint(score?.name as string)}
+      />
     </Container>
   )
 }
