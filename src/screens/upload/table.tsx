@@ -1,10 +1,9 @@
 import styled from '@emotion/styled'
-import { Card, Form, Input, message, Select } from 'antd'
-import { InboxOutlined } from '@ant-design/icons'
+import { Button, Card, Form, Input, message, Select } from 'antd'
+import { InboxOutlined, PictureOutlined } from '@ant-design/icons'
 import Dragger from 'antd/lib/upload/Dragger'
 // @ts-ignore
 import { UploadChangeParam } from 'antd/lib/upload'
-import { SubmitButton } from 'components/button'
 import { useEffect, useRef, useState } from 'react'
 import { useRequest } from 'hooks/use-request'
 import { useHistory } from 'react-router'
@@ -115,18 +114,28 @@ export const Table = () => {
 
   return (
     <Container>
-      <Dragger {...props} onChange={handleUpload}>
-        <p className="ant-upload-drag-icon">
-          <InboxOutlined />
-        </p>
-        <p className="ant-upload-text">单击此处或者将乐谱文件拖入这里</p>
-        <p className="ant-upload-hint">
-          你需要在打谱软件中将乐谱以 xml 格式导出
-        </p>
-      </Dragger>
-      <br />
+      {!loaded && (
+        <Dragger {...props} onChange={handleUpload}>
+          <p className="ant-upload-drag-icon">
+            <InboxOutlined />
+          </p>
+          <p className="ant-upload-text">单击此处或者将乐谱文件拖入这里</p>
+          <p className="ant-upload-hint">
+            你需要在打谱软件中将乐谱以 xml 格式导出
+          </p>
+        </Dragger>
+      )}
 
-      <Preview>
+      <Preview active={loaded}>
+        {!loaded && (
+          <Mask>
+            <div>
+              <PictureIcon />
+              <MaskTitle>乐谱与封面预览</MaskTitle>
+              <MaskSub>上传乐谱文件后自动生成</MaskSub>
+            </div>
+          </Mask>
+        )}
         <ScoreBox>
           <Score ref={scoreRef} />
         </ScoreBox>
@@ -201,9 +210,18 @@ export const Table = () => {
         </Form.Item>
 
         <Form.Item>
-          <SubmitButton loading={isLoading} htmlType="submit" type="primary">
-            发布乐谱
-          </SubmitButton>
+          <ButtonGroup>
+            <SubmitButton loading={isLoading} htmlType="submit" type="primary">
+              发布乐谱
+            </SubmitButton>
+            <CancelButton
+              onClick={() => {
+                window.location.reload()
+              }}
+            >
+              重新填写
+            </CancelButton>
+          </ButtonGroup>
         </Form.Item>
       </Form>
     </Container>
@@ -225,15 +243,50 @@ const Container = styled(Card)`
   }
 `
 
-const Preview = styled.div`
+interface PreviewProps {
+  active: boolean
+}
+const Preview = styled.div<PreviewProps>`
   display: flex;
-  margin-bottom: 2rem;
+  height: ${(props) => (props.active ? '49.5rem' : '18rem')};
+  position: relative;
+  margin: 2rem 0;
+  overflow: hidden;
+`
+
+const Mask = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 18rem;
+  background: #fafafa;
   border: 1px dashed #d9d9d9;
+`
+
+const PictureIcon = styled(PictureOutlined)`
+  display: block;
+  font-size: 3.6rem;
+  color: #7e9aff;
+  margin-bottom: 2.5rem;
+`
+
+const MaskTitle = styled.h4`
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
+  text-align: center;
+`
+
+const MaskSub = styled.p`
+  color: rgba(0, 0, 0, 0.45);
+  margin: 0.5rem 0 0;
 `
 
 const ScoreBox = styled.div`
   flex: 1;
-  height: 49.5rem;
+  height: 100%;
   background: ${color.greyLight};
   overflow: auto;
 `
@@ -245,10 +298,36 @@ const Score = styled.div`
 
 const PictureBox = styled.div`
   flex: 1;
-  background: ${color.grey};
+  height: 100%;
+  background: ${color.cyan};
 `
 
 const Picture = styled.img`
   width: 100%;
   height: 49.5rem;
+`
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const SubmitButton = styled(Button)`
+  display: block;
+  width: 50%;
+  border-radius: 2rem;
+`
+
+const CancelButton = styled(Button)`
+  display: block;
+  border-radius: 2rem;
+  margin-left: 1rem;
+  color: #ef422c;
+  border: 1px solid #ef422c;
+  :hover {
+    color: red;
+    border: 1px solid red;
+    font-weight: 500;
+  }
 `

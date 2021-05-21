@@ -1,4 +1,4 @@
-import { useEffect, useState, RefObject, useRef } from 'react'
+import { useEffect, useState, RefObject } from 'react'
 import { OpenSheetMusicDisplay as OSMD } from 'opensheetmusicdisplay'
 import axios from 'axios'
 
@@ -16,6 +16,7 @@ export const useRenderer = ({ scoreRef, xmlUrl }: useRendererParams) => {
         backend: 'canvas',
         drawTitle: true,
         autoResize: false,
+        disableCursor: true,
       })
 
       const xml = await axios.get(url)
