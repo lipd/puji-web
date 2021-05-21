@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { color } from 'style/color'
 import { useRequest } from 'hooks/use-request'
 import { useParams } from 'react-router'
-import { message } from 'antd'
+import { Button, message } from 'antd'
 import { useAuth } from 'hooks/use-auth'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import fileDownload from 'js-file-download'
@@ -17,6 +17,7 @@ import { ReactComponent as PrintIcon } from 'assets/print.svg'
 import { ReactComponent as ShareIcon } from 'assets/share.svg'
 import { Score } from 'types'
 import axios from 'axios'
+import { useState } from 'react'
 
 interface ActionPanelProps {
   score: Score | null
@@ -39,8 +40,11 @@ export const ActionPanel = ({
   const request = useRequest()
   const { user } = useAuth()
   const { id } = useParams<{ id: string }>()
+  const [favoriteLoading, setFavoriteLoading] = useState(false)
+  const [likeLoading, setLikeLoading] = useState(false)
 
   const handleLike = async () => {
+    setLikeLoading(true)
     if (!user) {
       return message.warning('点赞前请先登录')
     }
@@ -55,9 +59,11 @@ export const ActionPanel = ({
     } catch (err) {
       message.error('点赞失败')
     }
+    setLikeLoading(false)
   }
 
   const handleUnlike = async () => {
+    setLikeLoading(true)
     try {
       await request({
         url: `/users/liking/${id}`,
@@ -68,9 +74,11 @@ export const ActionPanel = ({
     } catch (err) {
       message.error('取消点赞失败')
     }
+    setLikeLoading(false)
   }
 
   const handleFavroite = async () => {
+    setFavoriteLoading(true)
     if (!user) {
       return message.warning('收藏前请先登录')
     }
@@ -85,9 +93,11 @@ export const ActionPanel = ({
     } catch (err) {
       message.error('收藏失败')
     }
+    setFavoriteLoading(false)
   }
 
   const handleUnfavroite = async () => {
+    setFavoriteLoading(true)
     try {
       await request({
         url: `/users/favorite/${id}`,
@@ -98,6 +108,7 @@ export const ActionPanel = ({
     } catch (err) {
       message.error('取消收藏失败')
     }
+    setFavoriteLoading(false)
   }
 
   const handleDownload = (url: string, filename: string) => {
@@ -118,31 +129,49 @@ export const ActionPanel = ({
   return (
     <Container>
       {liked ? (
-        <LikeFillIcon className="icon-active" onClick={handleUnlike} />
+        <Button type="link" disabled={likeLoading} onClick={handleUnlike}>
+          <LikeFillIcon className="icon-active" />
+        </Button>
       ) : (
-        <LikeIcon className="icon" onClick={handleLike} />
+        <Button type="link" disabled={likeLoading} onClick={handleLike}>
+          <LikeIcon className="icon" />
+        </Button>
       )}
       {favorited ? (
-        <FavoriteFillIcon className="icon-active" onClick={handleUnfavroite} />
+        <Button
+          type="link"
+          disabled={favoriteLoading}
+          onClick={handleUnfavroite}
+        >
+          <FavoriteFillIcon className="icon-active" />
+        </Button>
       ) : (
-        <FavoriteIcon className="icon" onClick={handleFavroite} />
+        <Button type="link" disabled={favoriteLoading} onClick={handleFavroite}>
+          <FavoriteIcon className="icon" />
+        </Button>
       )}
-      <DownloadIcon
-        className="icon"
+
+      <Button
+        type="link"
         onClick={() =>
           handleDownload(score?.xmlUrl as string, score?.name as string)
         }
-      />
+      >
+        <DownloadIcon className="icon" />
+      </Button>
+
       <CopyToClipboard
         text={score?.name + ': ' + window.location.href}
         onCopy={handleCopy}
       >
-        <ShareIcon className="icon" />
+        <Button type="link">
+          <ShareIcon className="icon" />
+        </Button>
       </CopyToClipboard>
-      <PrintIcon
-        className="icon"
-        onClick={() => handlePrint(score?.name as string)}
-      />
+
+      <Button type="link" onClick={() => handlePrint(score?.name as string)}>
+        <PrintIcon className="icon" />
+      </Button>
     </Container>
   )
 }
@@ -166,5 +195,9 @@ const Container = styled.div`
   .icon-active {
     width: 2.4rem;
     height: 2.4rem;
+  }
+
+  .ant-btn-link {
+    padding: 0;
   }
 `
