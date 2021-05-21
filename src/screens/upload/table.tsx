@@ -2,11 +2,15 @@ import styled from '@emotion/styled'
 import { Card, Form, Input, message, Select } from 'antd'
 import { InboxOutlined } from '@ant-design/icons'
 import Dragger from 'antd/lib/upload/Dragger'
+// @ts-ignore
 import { UploadChangeParam } from 'antd/lib/upload'
 import { SubmitButton } from 'components/button'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRequest } from 'hooks/use-request'
 import { useHistory } from 'react-router'
+import { useRenderer } from 'components/score/useRenderer'
+import { color } from 'style/color'
+import { uploadCover } from './upload-cover'
 
 const { Option } = Select
 
@@ -57,14 +61,28 @@ const props = {
 export const Table = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [xmlUrl, setXmlUrl] = useState<string | null>(null)
+  const [imgUrl, setImgUrl] = useState<string | null>(null)
   const request = useRequest()
   const history = useHistory()
+  const scoreRef = useRef<any>()
+  const { loaded } = useRenderer({ scoreRef, xmlUrl })
+
+  useEffect(() => {
+    if (!loaded) return
+
+    const canvas = document.getElementById(
+      'osmdCanvasVexFlowBackendCanvas1',
+    ) as HTMLCanvasElement
+
+    uploadCover({ canvas, request }, (res) => {
+      const { url } = res.data
+      message.success('成功生成封面')
+      setImgUrl(url)
+    })
+  }, [loaded])
 
   const handleUpload = (info: UploadChangeParam) => {
     const { status } = info.file
-    if (status !== 'uploading') {
-      console.log('first', info.file)
-    }
     if (status === 'done') {
       message.success(`${info.file.name} 已经上传`)
       setXmlUrl(info.file.response.url)
@@ -77,7 +95,10 @@ export const Table = () => {
     if (!xmlUrl) {
       return message.error('请先上传乐谱文件')
     }
-    const data = { ...values, xmlUrl }
+    if (!imgUrl) {
+      return message.error('需要生成封面')
+    }
+    const data = { ...values, xmlUrl, cover: imgUrl }
     setIsLoading(true)
     try {
       await request({
@@ -104,6 +125,13 @@ export const Table = () => {
         </p>
       </Dragger>
       <br />
+
+      <Preview>
+        <ScoreBox>
+          <Score ref={scoreRef} />
+        </ScoreBox>
+        <PictureBox>{imgUrl && <Picture src={imgUrl} />}</PictureBox>
+      </Preview>
 
       <Form layout="vertical" requiredMark={false} onFinish={handleSubmit}>
         <Form.Item
@@ -195,4 +223,32 @@ const Container = styled(Card)`
   .ant-form-item-label {
     font-weight: 500;
   }
+`
+
+const Preview = styled.div`
+  display: flex;
+  margin-bottom: 2rem;
+  border: 1px dashed #d9d9d9;
+`
+
+const ScoreBox = styled.div`
+  flex: 1;
+  height: 49.5rem;
+  background: ${color.greyLight};
+  overflow: auto;
+`
+
+const Score = styled.div`
+  width: 35rem;
+  background: white;
+`
+
+const PictureBox = styled.div`
+  flex: 1;
+  background: ${color.grey};
+`
+
+const Picture = styled.img`
+  width: 100%;
+  height: 49.5rem;
 `

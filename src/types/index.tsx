@@ -1,3 +1,5 @@
+import { AxiosPromise, AxiosRequestConfig } from 'axios'
+
 export interface Score {
   _id: number
   name: string
@@ -31,4 +33,8 @@ export interface User {
 export interface AuthForm {
   username: string
   password: string
+}
+
+export interface AuthRequest {
+  (config: AxiosRequestConfig): AxiosPromise<any>
 }
