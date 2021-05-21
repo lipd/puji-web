@@ -37,7 +37,7 @@ export const DiscoverScreen = () => {
       history.push({ search: query })
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterQuery, page, order])
+  }, [filterQuery, page, order, q])
 
   return (
     <Layout>
