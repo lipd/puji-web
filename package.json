@@ -1,7 +1,10 @@
 {
-  "name": "score-bus",
-  "version": "0.1.0",
-  "private": true,
+  "name": "puji-web",
+  "version": "1.0.0",
+  "description": "a music score management platform",
+  "repository": "git@github.com:lipd/puji.git",
+  "author": "lipd <lipeidao@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "@craco/craco": "^6.1.1",
     "@emotion/react": "^11.1.5",
