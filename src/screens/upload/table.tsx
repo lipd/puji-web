@@ -78,7 +78,7 @@ export const Table = () => {
       message.success('成功生成封面')
       setImgUrl(url)
     })
-  }, [loaded, request])
+  }, [loaded])
 
   const handleUpload = (info: UploadChangeParam) => {
     const { status } = info.file
