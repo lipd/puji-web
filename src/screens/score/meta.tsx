@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import dayjs from 'dayjs'
 import { color } from 'style/color'
 import { translator } from 'utils/translate'
 
@@ -10,12 +11,14 @@ export type MetaItem = {
 export const Meta = ({ data = [] }: { data: MetaItem[] }) => {
   return (
     <Container>
-      {data.map((each, i) => (
+      {data.map((each) => (
         <Item key={each.key}>
           <ItemKey>{each.key}</ItemKey>
           <ItemValue>
             {Array.isArray(each.value) ? (
               <List data={each.value} />
+            ) : each.key === '上传时间' ? (
+              dayjs(each.value).format('YYYY 年 M 月 D 日')
             ) : (
               each.value
             )}
@@ -42,8 +45,9 @@ const Container = styled.div`
 
 const Item = styled.div`
   display: flex;
-  color: ${color.grey};
   margin-bottom: 1rem;
+  color: ${color.grey};
+  font-weight: 500;
 `
 
 const ItemKey = styled.div`

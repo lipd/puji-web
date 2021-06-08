@@ -7,6 +7,7 @@ import { Score } from 'types'
 import { Skeleton } from 'antd'
 import { MetaItem } from './meta'
 import { useState } from 'react'
+import userIcon from 'assets/user-online.svg'
 
 interface MessagePanelProp {
   score: Score | null
@@ -51,7 +52,7 @@ export const MessagePanel = ({
             />
             <Divider />
             <Uploader>
-              <Avatar src={score.uploader?.avatar} />
+              <Avatar src={score.uploader?.avatar || userIcon} />
               <AvatarName>{score.uploader?.name}</AvatarName>
             </Uploader>
             <ActionPanel
@@ -95,10 +96,11 @@ const Title = styled.h1`
 const Uploader = styled.div`
   display: flex;
   align-items: center;
-  margin: 0 0 2rem;
+  margin: 2rem 0 3rem;
 `
 
 const Avatar = styled.img`
+  background-size: 4rem;
   display: block;
   margin-right: 1rem;
   height: 4rem;
@@ -107,8 +109,10 @@ const Avatar = styled.img`
 `
 
 const AvatarName = styled.div`
-  font-size: 1.4rem;
-  color: ${color.grey};
+  padding-left: 0.5rem;
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: ${color.somber};
 `
 
 const Discription = styled.p`

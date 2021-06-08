@@ -18,7 +18,7 @@ export const Bookcard = ({ score }: { score: Score }) => {
     .slice(0, 4)
     .map((each) => instrumentTable[each as InstrumentTag])
   const instrumentNames =
-    score.instruments.length > 3 ? [...instruments, '...'] : instruments
+    score.instruments.length > 4 ? [...instruments, '...'] : instruments
 
   return (
     <Container>
@@ -38,10 +38,10 @@ export const Bookcard = ({ score }: { score: Score }) => {
           </InstrumentGroup>
         </Top>
         <Bottom>
-          <FavoriteIcon className="icon" />
-          <BottomText>{score.favorites}</BottomText>
-          <LikeIcon className="icon like" />
+          <LikeIcon className="icon" />
           <BottomText>{score.likes}</BottomText>
+          <FavoriteIcon className="icon favorite" />
+          <BottomText>{score.favorites}</BottomText>
         </Bottom>
       </Meta>
     </Container>
@@ -108,7 +108,7 @@ const Author = styled.div`
 `
 
 const AuthorText = styled.span`
-  background: ${color.primary};
+  background: #6c87fd92;
   color: ${color.cyan};
   border-radius: 0.5rem;
   padding: 0.2rem 0.5rem;
@@ -124,7 +124,7 @@ const InstrumentGroup = styled.div`
 `
 
 const Instrument = styled.div`
-  color: ${color.primary};
+  color: #6c87fddf;
   background: ${color.primaryLight};
   border-radius: 0.5rem;
   padding: 0.2rem 0.4rem;
@@ -137,7 +137,7 @@ const Bottom = styled.div`
   font-size: 1.2rem;
   font-weight: 500;
   color: ${color.grey};
-  padding-left: 0.3rem;
+  padding-left: 0.4rem;
 
   .icon {
     display: block;
@@ -147,7 +147,7 @@ const Bottom = styled.div`
     height: 1.4rem;
   }
 
-  .like {
+  .favorite {
     position: relative;
     margin-left: 3rem;
   }
