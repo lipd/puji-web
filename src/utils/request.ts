@@ -1,5 +1,25 @@
+import { message } from 'antd'
 import axios from 'axios'
+import { logout } from 'utils/auth'
+import { constants } from './constants'
 
-export const request = axios.create({
-  baseURL: 'http://api-puji.jiewangji.com/',
+const instance = axios.create({
+  baseURL: constants.baseUrl,
 })
+
+instance.interceptors.response.use(
+  (response) => {
+    return response
+  },
+  (error) => {
+    if (error.response.status) {
+      message.error('登录过期，请重新登录')
+      logout()
+      window.location.href = '/sign'
+      return
+    }
+    return error
+  },
+)
+
+export const request = instance
