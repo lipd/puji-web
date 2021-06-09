@@ -17,7 +17,11 @@ export const Register = () => {
       message.success('注册成功')
       history.replace('/')
     } catch (err) {
-      message.error(err.response.data.message)
+      if (err.response.data.message) {
+        message.error(err.response.data.message)
+      } else {
+        message.error('注册失败')
+      }
     }
     setIsLoading(false)
   }

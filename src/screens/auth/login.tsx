@@ -18,7 +18,12 @@ export const Login = () => {
       setIsLoading(false)
       history.replace('/')
     } catch (err) {
-      message.error(err.response.data.message)
+      console.log(err)
+      if (err.response.data.message) {
+        message.error(err.response.data.message)
+      } else {
+        message.error('登录失败')
+      }
       setIsLoading(false)
     }
   }
