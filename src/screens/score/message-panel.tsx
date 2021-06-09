@@ -41,7 +41,7 @@ export const MessagePanel = ({
 
   return (
     <Container>
-      <Skeleton loading={loading} paragraph={{ rows: 16 }}>
+      <Skeleton active loading={loading} paragraph={{ rows: 16 }}>
         {score && (
           <>
             <Title>{score.name}</Title>

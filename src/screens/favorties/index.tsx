@@ -17,6 +17,7 @@ interface ScoreData {
 export const FavoritesScreen = () => {
   const [filterState, filterQuery, setFilterState] = useFilter()
   const { user } = useAuth()
+  const [loading, setLoading] = useState(true)
   const request = useRequest()
   const history = useHistory()
   const [scoreData, setScoreData] = useState<ScoreData>({
@@ -28,13 +29,14 @@ export const FavoritesScreen = () => {
 
   useEffect(() => {
     if (!user) return
-
+    setLoading(true)
     const pageQuery = page > 1 ? `page=${page}&` : ''
     const orderQuery = order > 0 ? `order=${order}&` : ''
     const query = pageQuery + orderQuery + filterQuery
 
     request({ url: `/users/${user._id}/favorites?${query}` }).then((res) => {
       setScoreData(res.data)
+      setLoading(false)
       history.push({ search: query })
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,6 +58,7 @@ export const FavoritesScreen = () => {
             setPage={setPage}
             order={order}
             setOrder={setOrder}
+            loading={loading}
           />
         </Main>
       </Page>

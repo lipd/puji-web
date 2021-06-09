@@ -16,7 +16,7 @@ export const Score = ({ scoreRef, renderer }: ScoreProp) => {
     <Container>
       <Paper>
         {renderer.loading && (
-          <Skeleton paragraph={{ rows: 16 }} className="skeleton" />
+          <Skeleton active paragraph={{ rows: 16 }} className="skeleton" />
         )}
         <div className="canvas" ref={scoreRef}></div>
       </Paper>

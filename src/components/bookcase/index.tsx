@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Bookcard, CARD_SIZE } from './bookcard'
 import { Header } from './header'
-import { Pagination } from 'antd'
+import { Pagination, Spin } from 'antd'
 import { Score } from 'types'
 import { Link } from 'react-router-dom'
 
@@ -13,6 +13,7 @@ interface BookcaseProps {
   setPage: (page: number) => void
   order: number
   setOrder: (order: number) => void
+  loading: boolean
 }
 export const Bookcase = ({
   keyword,
@@ -22,6 +23,7 @@ export const Bookcase = ({
   setPage,
   order,
   setOrder,
+  loading,
 }: BookcaseProps) => {
   const handleChangePage = (page: number) => {
     setPage(page)
@@ -29,31 +31,41 @@ export const Bookcase = ({
 
   return (
     <Container>
-      <Header keyword={keyword} order={order} setOrder={setOrder} />
-      <Wrapper>
-        <BookcardGroup>
-          {scores.map((score) => (
-            <Link key={score._id} to={`/score/${score._id}`}>
-              <Bookcard score={score} />
-            </Link>
-          ))}
-        </BookcardGroup>
-      </Wrapper>
-      <Bottom>
-        {total > 0 && (
-          <Pagination
-            current={page}
-            pageSize={9}
-            total={total}
-            onChange={handleChangePage}
-          />
-        )}
-      </Bottom>
+      {loading ? (
+        <Spin size="default" tip="乐谱加载中......" />
+      ) : (
+        <div>
+          <Header keyword={keyword} order={order} setOrder={setOrder} />
+          <Wrapper>
+            <BookcardGroup>
+              {scores.map((score) => (
+                <Link key={score._id} to={`/score/${score._id}`}>
+                  <Bookcard score={score} />
+                </Link>
+              ))}
+            </BookcardGroup>
+          </Wrapper>
+          <Bottom>
+            {total > 0 && (
+              <Pagination
+                current={page}
+                pageSize={9}
+                total={total}
+                onChange={handleChangePage}
+              />
+            )}
+          </Bottom>
+        </div>
+      )}
     </Container>
   )
 }
 
-const Container = styled.div``
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 6rem);
+`
 
 const Wrapper = styled.div`
   min-height: ${CARD_SIZE.HEIGHT * 3 + CARD_SIZE.MARGIN * 6}rem;

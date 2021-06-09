@@ -18,6 +18,7 @@ export const MineScreen = () => {
   const [filterState, filterQuery, setFilterState] = useFilter()
   const { user } = useAuth()
   const request = useRequest()
+  const [loading, setLoading] = useState(true)
   const history = useHistory()
   const [scoreData, setScoreData] = useState<ScoreData>({
     content: [],
@@ -29,12 +30,14 @@ export const MineScreen = () => {
   useEffect(() => {
     if (!user) return
 
+    setLoading(true)
     const pageQuery = page > 1 ? `page=${page}&` : ''
     const orderQuery = order > 0 ? `order=${order}&` : ''
     const query = pageQuery + orderQuery + filterQuery
 
     request({ url: `/scores/mine?${query}` }).then((res) => {
       setScoreData(res.data)
+      setLoading(false)
       history.push({ search: query })
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,6 +59,7 @@ export const MineScreen = () => {
             setPage={setPage}
             order={order}
             setOrder={setOrder}
+            loading={loading}
           />
         </Main>
       </Page>
