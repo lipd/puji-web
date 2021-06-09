@@ -7,6 +7,7 @@ import { UploadScreen } from 'screens/upload'
 import { UserScreen } from 'screens/user'
 import { MineScreen } from 'screens/mine'
 import { FavoritesScreen } from 'screens/favorties'
+import { PrivateRoute } from 'components/private-route'
 
 function App() {
   return (
@@ -18,18 +19,18 @@ function App() {
         <Route path="/sign">
           <AuthScreen />
         </Route>
-        <Route path="/upload">
+        <PrivateRoute path="/upload">
           <UploadScreen />
-        </Route>
-        <Route path="/user">
+        </PrivateRoute>
+        <PrivateRoute path="/user">
           <UserScreen />
-        </Route>
-        <Route path="/mine">
+        </PrivateRoute>
+        <PrivateRoute path="/mine">
           <MineScreen />
-        </Route>
-        <Route path="/favorites">
+        </PrivateRoute>
+        <PrivateRoute path="/favorites">
           <FavoritesScreen />
-        </Route>
+        </PrivateRoute>
         <Route path="/">
           <DiscoverScreen />
         </Route>
