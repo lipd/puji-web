@@ -8,6 +8,7 @@ import { UploadFile } from 'antd/lib/upload/interface'
 import { User } from 'types'
 import { Filed } from 'components/form/filed'
 import { useRequest } from 'hooks/use-request'
+import { constants } from 'utils/constants'
 
 export const Table = () => {
   const { user, setUser } = useAuth()
@@ -66,7 +67,7 @@ export const Table = () => {
               <Upload
                 name="file"
                 headers={{ authorization: `Bearer ${user.token as string}` }}
-                action="http://localhost:3005/upload/avatar"
+                action={`${constants.baseUrl}/upload/avata"`}
                 showUploadList={false}
                 onChange={handleUpdateAvatar}
               >

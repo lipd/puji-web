@@ -10,6 +10,7 @@ import { useHistory } from 'react-router'
 import { useRenderer } from 'components/score/useRenderer'
 import { color } from 'style/color'
 import { uploadCover } from './upload-cover'
+import { constants } from 'utils/constants'
 
 const { Option } = Select
 
@@ -53,7 +54,7 @@ const genreOptions = [
 const props = {
   name: 'file',
   multiple: false,
-  action: 'http://localhost:3005/upload/score',
+  action: `${constants.baseUrl}/upload/score`,
   maxCount: 1,
 }
 
@@ -78,6 +79,7 @@ export const Table = () => {
       message.success('成功生成封面')
       setImgUrl(url)
     })
+    // eslint-disable-next-line
   }, [loaded])
 
   const handleUpload = (info: UploadChangeParam) => {
