@@ -12,7 +12,7 @@ instance.interceptors.response.use(
     return response
   },
   (error) => {
-    if (error.response.status) {
+    if (error.response && error.response.status === 401) {
       message.error('登录过期，请重新登录')
       logout()
       window.location.href = '/sign'
