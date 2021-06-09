@@ -1,14 +1,14 @@
-import { useAuth } from 'hooks/use-auth'
-import React from 'react'
 import { Redirect, Route, RouteProps } from 'react-router-dom'
+import { getToken } from 'utils/auth'
 
 export const PrivateRoute = ({ children, ...rest }: RouteProps) => {
-  const { user } = useAuth()
+  const token = getToken()
+
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        user ? (
+        token ? (
           children
         ) : (
           <Redirect
