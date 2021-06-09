@@ -1,3 +1,3 @@
 export const constants = {
-  baseUrl: 'http://api-puji.jiewangji.com',
+  baseUrl: 'http://puji.jiewangji.com:3005',
 }
