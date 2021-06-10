@@ -67,7 +67,7 @@ export const Table = () => {
               <Upload
                 name="file"
                 headers={{ authorization: `Bearer ${user.token as string}` }}
-                action={`${constants.baseUrl}/upload/avata"`}
+                action={`${constants.baseUrl}/upload/avatar`}
                 showUploadList={false}
                 onChange={handleUpdateAvatar}
               >
