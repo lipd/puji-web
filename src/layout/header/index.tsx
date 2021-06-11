@@ -94,6 +94,15 @@ const HeaderLeft = styled.div`
 `
 
 const NavItem = styled.h2`
+  @media screen and (max-width: 750px) {
+    padding-left: 2rem;
+  }
+  @media screen and (max-width: 700px) {
+    padding-left: 1rem;
+  }
+  @media screen and (max-width: 700px) {
+    display: none;
+  }
   padding-left: 3rem;
   line-height: 3rem;
   font-size: 1.5rem;
