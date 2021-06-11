@@ -1,6 +1,7 @@
 import { useEffect, useState, RefObject, useRef } from 'react'
 import { OpenSheetMusicDisplay as OSMD } from 'opensheetmusicdisplay'
-import AudioPlayer from 'osmd-audio-player'
+// @ts-ignore
+import AudioPlayer, { SoundfontPlayer } from 'osmd-audio-player'
 import axios from 'axios'
 import { PlaybackEvent } from 'osmd-audio-player/dist/PlaybackEngine'
 import { Score } from 'types'
@@ -15,7 +16,9 @@ export const useScore = ({ scoreRef, scoreData }: useScoreParams) => {
 
   const [playerLoading, setPlayerLoading] = useState(true)
   const playerLoaded = useRef(false)
-  const engine = useRef(new AudioPlayer())
+  const audioCtx = new AudioContext() as any
+  const soundfont = new SoundfontPlayer({ from: 'server.com/soundfonts/' })
+  const engine = useRef(new AudioPlayer(audioCtx, soundfont))
 
   const [currentStep, setCurrentStep] = useState(0)
   const [totalStep, setTotalStep] = useState(0)
