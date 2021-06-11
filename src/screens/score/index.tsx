@@ -72,6 +72,9 @@ const Left = styled.main`
 `
 
 const Player = styled.div`
+  @media screen and (max-width: 1115px) {
+    width: 100%;
+  }
   position: absolute;
   width: calc(100% - 40rem);
   height: 4rem;
@@ -82,4 +85,7 @@ const Right = styled.aside`
   border-left: 1px solid ${color.greyLight};
   height: calc(100vh - 6rem);
   overflow: auto;
+  @media screen and (max-width: 1115px) {
+    display: none;
+  }
 `
