@@ -48,7 +48,7 @@ export const Header = ({ keyword, order, setOrder }: HeaderProps) => {
 }
 
 const Container = styled.div`
-  min-width: 100rem;
+  width: 100%;
   display: flex;
   margin: 1rem 1rem 0.5rem;
   padding: 0 0 0.2rem 0;

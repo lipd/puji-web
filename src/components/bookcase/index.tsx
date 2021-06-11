@@ -32,9 +32,11 @@ export const Bookcase = ({
   return (
     <Container>
       {loading ? (
-        <Spin size="default" tip="乐谱加载中......" />
+        <SpinContainer>
+          <Spin size="default" tip="乐谱加载中......" />
+        </SpinContainer>
       ) : (
-        <div>
+        <div style={{ width: '100%' }}>
           <Header keyword={keyword} order={order} setOrder={setOrder} />
           <Wrapper>
             <BookcardGroup>
@@ -61,20 +63,28 @@ export const Bookcase = ({
   )
 }
 
+const SpinContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 const Container = styled.div`
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   min-height: calc(100vh - 6rem);
+  width: ${CARD_SIZE.WIDTH * 3 + CARD_SIZE.MARGIN * 6}rem;
 `
 
 const Wrapper = styled.div`
-  min-height: ${CARD_SIZE.HEIGHT * 3 + CARD_SIZE.MARGIN * 6}rem;
+  width: 100%;
 `
 
 const BookcardGroup = styled.div`
-  max-width: ${CARD_SIZE.WIDTH * 3 + CARD_SIZE.MARGIN * 6}rem;
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
 `
 
 const Bottom = styled.div`

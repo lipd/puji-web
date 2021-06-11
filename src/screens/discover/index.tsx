@@ -67,6 +67,9 @@ export const DiscoverScreen = () => {
 }
 
 export const Sidebar = styled.aside`
+  @media screen and (max-width: 1260px) {
+    display: none;
+  }
   padding: 2rem 3rem;
   box-sizing: border-box;
   width: 30rem;
@@ -88,7 +91,6 @@ const Title = styled.h2`
 const Main = styled.main`
   display: flex;
   justify-content: center;
-  align-items: flex;
   width: 100%;
   padding: 0rem 2rem;
 `
