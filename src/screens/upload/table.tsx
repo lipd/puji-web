@@ -117,7 +117,7 @@ export const Table = () => {
   return (
     <Container>
       {!loaded && (
-        <Dragger {...props} onChange={handleUpload}>
+        <Dragger {...props} onChange={handleUpload} accept=".xml">
           <p className="ant-upload-drag-icon">
             <InboxOutlined />
           </p>
