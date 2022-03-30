@@ -24,7 +24,7 @@
     "dayjs": "^1.10.4",
     "js-file-download": "^0.4.12",
     "opensheetmusicdisplay": "^0.9.5",
-    "osmd-audio-player": "^0.6.4",
+    "osmd-audio-player": "0.6.4",
     "react": "^17.0.2",
     "react-copy-to-clipboard": "^5.0.3",
     "react-dom": "^17.0.2",

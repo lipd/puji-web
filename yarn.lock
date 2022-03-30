@@ -7783,9 +7783,9 @@ os-browserify@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/os-browserify/-/os-browserify-0.3.0.tgz#854373c7f5c2315914fc9bfc6bd8238fdda1ec27"
 
-osmd-audio-player@^0.6.4:
+osmd-audio-player@0.6.4:
   version "0.6.4"
-  resolved "https://registry.yarnpkg.com/osmd-audio-player/-/osmd-audio-player-0.6.4.tgz#f5c25ba380c3542df834bd2fe15e5a9f1a06c8a7"
+  resolved "http://bnpm.byted.org/osmd-audio-player/-/osmd-audio-player-0.6.4.tgz#f5c25ba380c3542df834bd2fe15e5a9f1a06c8a7"
   integrity sha512-Eq/RmGi1GZKNF5XKtcnRkuRnzjJddl6s0wzmvmUcX9y0WMs0DIiGh7VEQfnrp7ywvQJBEYP4flPuLS+c/TYJog==
   dependencies:
     opensheetmusicdisplay "^0.8.4"
