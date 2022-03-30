@@ -52,8 +52,8 @@ export const DiscoverScreen = () => {
         <Main>
           <Bookcase
             keyword={q}
-            scores={scoreData.content}
-            total={scoreData.total}
+            scores={scoreData?.content || []}
+            total={scoreData?.total || 0}
             page={page}
             setPage={setPage}
             order={order}
